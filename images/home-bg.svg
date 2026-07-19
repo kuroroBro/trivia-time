@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1600" role="img" aria-labelledby="title desc">
+  <title id="title">Trivia Time hero background</title>
+  <desc id="desc">A glowing stylized brain with radiating cyan, pink, and gold spark lines and a floating question mark, on a deep navy background.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="18%" r="75%">
+      <stop offset="0%" stop-color="#17314b"/>
+      <stop offset="45%" stop-color="#0e2236"/>
+      <stop offset="100%" stop-color="#08111e"/>
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#31d5d9" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#31d5d9" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowPink" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff5e93" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ff5e93" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="brainGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#31d5d9"/>
+      <stop offset="100%" stop-color="#ff5e93"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1600" fill="url(#bg)"/>
+  <circle cx="820" cy="560" r="480" fill="url(#glowCyan)"/>
+  <circle cx="620" cy="700" r="420" fill="url(#glowPink)"/>
+
+  <!-- radiating spark lines -->
+  <g stroke="#ffd166" stroke-width="10" stroke-linecap="round" opacity="0.75">
+    <line x1="720" y1="230" x2="720" y2="140"/>
+    <line x1="560" y1="270" x2="480" y2="200"/>
+    <line x1="900" y1="270" x2="980" y2="200"/>
+    <line x1="440" y1="420" x2="330" y2="390"/>
+    <line x1="1010" y1="420" x2="1120" y2="390"/>
+  </g>
+  <g fill="#ffd166" opacity="0.85">
+    <circle cx="720" cy="130" r="14"/>
+    <circle cx="470" cy="192" r="10"/>
+    <circle cx="990" cy="192" r="10"/>
+    <circle cx="320" cy="386" r="9"/>
+    <circle cx="1132" cy="386" r="9"/>
+  </g>
+
+  <!-- stylized brain: two lobes -->
+  <g fill="url(#brainGrad)">
+    <path d="M560 420
+      C 460 420 380 500 380 610
+      C 380 660 400 700 430 730
+      C 400 760 385 800 385 840
+      C 385 940 470 1020 580 1020
+      C 620 1020 655 1010 685 990
+      C 700 1000 715 1005 730 1005
+      L 730 460
+      C 700 435 630 420 560 420 Z"/>
+    <path d="M880 420
+      C 980 420 1060 500 1060 610
+      C 1060 660 1040 700 1010 730
+      C 1040 760 1055 800 1055 840
+      C 1055 940 970 1020 860 1020
+      C 820 1020 785 1010 755 990
+      C 740 1000 725 1005 710 1005
+      L 710 460
+      C 740 435 810 420 880 420 Z"/>
+  </g>
+  <path d="M720 460 L720 1005" stroke="#08111e" stroke-width="10" opacity="0.5"/>
+  <g stroke="#0e2236" stroke-width="7" fill="none" opacity="0.55" stroke-linecap="round">
+    <path d="M470 560 C 520 540 560 560 540 610 C 520 650 470 640 470 600"/>
+    <path d="M470 760 C 520 745 560 770 535 810"/>
+    <path d="M970 560 C 920 540 880 560 900 610 C 920 650 970 640 970 600"/>
+    <path d="M970 760 C 920 745 880 770 905 810"/>
+  </g>
+
+  <!-- floating question mark -->
+  <g transform="translate(1140 640)" fill="#31d5d9">
+    <text x="0" y="0" font-family="Georgia, 'Times New Roman', serif" font-size="150" font-weight="700" text-anchor="middle">?</text>
+  </g>
+</svg>
