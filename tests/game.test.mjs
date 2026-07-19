@@ -12,10 +12,10 @@ function started(count = 6) {
   return room;
 }
 
-test("bank has at least 20 questions in all 12 categories", () => {
-  assert.equal(QUESTIONS.length, 295);
+test("bank has at least 20 questions in all 14 categories", () => {
+  assert.equal(QUESTIONS.length, 365);
   for (const category of game.CATEGORIES) assert.ok(QUESTIONS.filter((q) => q.category === category).length >= 20, category);
-  for (const theme of ["Star Wars", "Marvel Cinematic Universe", "Disney & Pixar", "The Lord of the Rings", "Jurassic Park", "Studio Ghibli"]) {
+  for (const theme of ["Star Wars", "Marvel Cinematic Universe", "Disney & Pixar", "The Lord of the Rings", "Jurassic Park", "Studio Ghibli", "Friends", "Grey's Anatomy", "Young Sheldon", "The Big Bang Theory", "How I Met Your Mother"]) {
     assert.ok(QUESTIONS.filter((q) => q.theme === theme).length >= 10, theme);
   }
 });
@@ -63,4 +63,10 @@ test("theme filtering selects the requested movie theme", () => {
   const res = game.buildDeck(QUESTIONS, { categories: ["Movies"], themes: ["Star Wars"], questionCount: 6 }, [], () => 0.1);
   assert.equal(res.ok, true);
   assert.ok(res.deck.every((q) => q.theme === "Star Wars"));
+});
+
+test("selecting a theme includes its parent category automatically", () => {
+  const res = game.buildDeck(QUESTIONS, { categories: [], themes: ["Friends"], questionCount: 6 }, [], () => 0.1);
+  assert.equal(res.ok, true);
+  assert.ok(res.deck.every((q) => q.category === "TV Shows" && q.theme === "Friends"));
 });

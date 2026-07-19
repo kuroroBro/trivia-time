@@ -3,7 +3,7 @@ import { displayAnswers, judgeAnswer } from "./matcher.js";
 export const MAX_PLAYERS = 12;
 export const CATEGORIES = [
   "Movies", "Books", "The '90s", "Food & Drink", "Animals", "Science",
-  "Sports", "General Knowledge", "Philippine History", "Philippine Geography",
+  "Sports", "Music", "TV Shows", "General Knowledge", "Philippine History", "Philippine Geography",
   "Filipino Culture & Language", "Filipino Entertainment",
 ];
 
@@ -65,8 +65,10 @@ function shuffle(items, rng) {
 }
 
 export function buildDeck(pool, settings, usedIds = [], rng = Math.random) {
-  const categories = settings.categories?.length ? settings.categories : CATEGORIES;
   const selectedThemes = settings.themes || [];
+  const explicitCategories = settings.categories?.length ? settings.categories : (selectedThemes.length ? [] : CATEGORIES);
+  const impliedCategories = pool.filter((q) => selectedThemes.includes(q.theme)).map((q) => q.category);
+  const categories = [...new Set([...explicitCategories, ...impliedCategories])];
   const themedCategories = new Set(pool.filter((q) => selectedThemes.includes(q.theme)).map((q) => q.category));
   const eligible = pool.filter((q) => categories.includes(q.category) && !usedIds.includes(q.id) &&
     (!themedCategories.has(q.category) || selectedThemes.includes(q.theme)));

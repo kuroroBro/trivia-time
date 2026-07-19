@@ -25,7 +25,7 @@
 - [ ] Build a generator that validates IDs, categories, themes, aliases,
   matching options, explanations, sources, and image accessibility.
 - [ ] Curate at least 15 questions each for Movies, Books, The '90s, Food &
-  Drink, Animals, Science, Sports, General Knowledge, Philippine History,
+  Drink, Animals, Science, Sports, Music, TV Shows, General Knowledge, Philippine History,
   Philippine Geography, Filipino Culture & Language, and Filipino
   Entertainment.
 - [ ] Include at least 10 questions each for Star Wars, Marvel Cinematic
@@ -33,6 +33,10 @@
   Ghibli, plus at least 15 general Movie questions outside those themes.
 - [ ] Include at least 10 Harry Potter themed Book questions without making the
   theme the whole Books category.
+- [ ] Include at least 10 questions each for Friends, Grey's Anatomy, Young
+  Sheldon, The Big Bang Theory, and How I Met Your Mother.
+- [ ] Show category/theme question counts and let selecting a theme imply its
+  parent category without another checkbox.
 - [ ] Add Filipino/English and diacritic-free aliases where factually valid,
   and test that normalization does not turn distinct Filipino answers into the
   same answer.

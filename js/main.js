@@ -88,10 +88,10 @@ function gameSettings(){return{categories:[...document.querySelectorAll("[data-c
 
 const saved=loadSettings();$("name-input").value=saved.name||"";$("spectator-input").checked=saved.spectatorHost;
 for(let i=6;i<=20;i++)$("count-select").add(new Option(`${i} rounds`,i,i===10,i===10));
-for(const c of game.CATEGORIES){const label=document.createElement("label");label.innerHTML=`<input type="checkbox" data-category value="${c}" checked> ${c}`;$("category-list").appendChild(label)}
-for(const t of THEMES){const label=document.createElement("label");label.innerHTML=`<input type="checkbox" data-theme value="${t}"> ${t}`;$("theme-list").appendChild(label)}
+for(const c of game.CATEGORIES){const count=QUESTIONS.filter((q)=>q.category===c).length;const label=document.createElement("label");label.innerHTML=`<input type="checkbox" data-category value="${c}" checked> ${c} (${count})`;$("category-list").appendChild(label)}
+for(const t of THEMES){const count=QUESTIONS.filter((q)=>q.theme===t).length;const label=document.createElement("label");label.innerHTML=`<input type="checkbox" data-theme value="${t}"> ${t} (${count})`;$("theme-list").appendChild(label)}
 $("create-btn").onclick=create;$("join-btn").onclick=join;$("lock-btn").onclick=()=>act("answer",{answer:$("answer-input").value});
 $("answer-input").oninput=(e)=>{answerDraft=e.target.value};
 $("answer-input").onkeydown=(e)=>{if(e.key==="Enter")$("lock-btn").click()};
-$("start-btn").onclick=()=>{const settings=gameSettings();if(!settings.categories.length)return toast("Choose at least one category.");saveSettings({...readSettings(),...settings});act("start",{settings})};$("next-btn").onclick=()=>act("advance",{});$("again-btn").onclick=()=>act("again",{});$("reset-history-btn").onclick=()=>{resetUsedIds();toast("Question history reset")};
+$("start-btn").onclick=()=>{const settings=gameSettings();if(!settings.categories.length&&!settings.themes.length)return toast("Choose at least one category or theme.");saveSettings({...readSettings(),...settings});act("start",{settings})};$("next-btn").onclick=()=>act("advance",{});$("again-btn").onclick=()=>act("again",{});$("reset-history-btn").onclick=()=>{resetUsedIds();toast("Question history reset")};
 const queryCode=normalizeCode(new URLSearchParams(location.search).get("room"));if(queryCode.length===4)$("code-input").value=queryCode;

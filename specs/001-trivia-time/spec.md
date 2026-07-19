@@ -34,6 +34,8 @@ The initial question bank supports these top-level categories:
 | Animals | Species, habitats, behavior, and records |
 | Science | Biology, chemistry, physics, astronomy, Earth, and inventions |
 | Sports | Rules, athletes, teams, events, and records |
+| Music | Artists, bands, instruments, albums, composers, genres, and music terminology |
+| TV Shows | General television plus **Friends**, **Grey's Anatomy**, **Young Sheldon**, **The Big Bang Theory**, and **How I Met Your Mother** themed sets |
 | General Knowledge | Geography, history, language, art, music, people, and everyday facts |
 | Philippine History | Precolonial Philippines, major events, national figures, independence, and historical landmarks |
 | Philippine Geography | Regions, provinces, cities, islands, bodies of water, landmarks, and natural features |
@@ -45,6 +47,11 @@ narrows a question within a category, such as `Star Wars` under Movies or
 `Harry Potter` under Books. Themes are filters, not separate categories, so a
 Host can choose all Movies questions, only Star Wars questions, or a mixed
 selection.
+
+A theme selection automatically includes its parent category. The Host can
+select Star Wars, Harry Potter, Friends, or another theme directly without
+also checking Movies, Books, or TV Shows. The selection screen shows the
+number of available questions beside every category and theme.
 
 The popular-movie themes are independently selectable. Selecting Movies with
 no theme restriction includes both franchise questions and general questions
