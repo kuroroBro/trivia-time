@@ -1,4 +1,5 @@
 import * as game from "./game.js";
+import { reconcileDraft } from "./draft.js";
 import { QUESTIONS, THEMES } from "./questions.js";
 import { hostRoom, joinRoom, normalizeCode } from "./room.js";
 import { createResumeToken, loadSession, loadSettings, loadUsedIds, markUsedIds, resetUsedIds, saveSession, saveSettings } from "./storage.js";
@@ -6,6 +7,7 @@ import { createResumeToken, loadSession, loadSettings, loadUsedIds, markUsedIds,
 const HOST_ID = "host";
 const $ = (id) => document.getElementById(id);
 let isHost = false, room = null, net = null, state = null, stateReceivedAt = Date.now(), myId = null, activeToken = null, raf = null, autoAdvancedFor = null;
+let draftQuestionId = null, answerDraft = "";
 const screens = ["home", "lobby", "question", "reveal", "over"];
 const show = (name) => screens.forEach((x) => $(`screen-${x}`).classList.toggle("hidden", x !== name));
 function toast(text) { const el=$("toast"); el.textContent=text; el.classList.remove("hidden"); setTimeout(()=>el.classList.add("hidden"),2400); }
@@ -30,7 +32,15 @@ function renderQuestion() {
   const q=state.question; $("progress").textContent=`Round ${state.roundIndex+1} of ${state.deckLength}`; $("category-chip").textContent=q.category;
   $("theme-label").textContent=q.theme||""; $("question-prompt").textContent=q.prompt; roster("question-roster");
   const player=me(), area=$("answer-area"); area.classList.toggle("hidden",!player);
-  if (player) { $("answer-input").value=player.myAnswer||""; $("answer-input").disabled=player.locked; $("lock-btn").disabled=player.locked; $("lock-status").textContent=player.locked?"✓ Locked in — waiting for the others":"Your answer stays private until reveal."; if(!player.locked) setTimeout(()=>$("answer-input").focus(),0); }
+  if (player) {
+    const input=$("answer-input");
+    const draft=reconcileDraft({questionId:q.id,draftQuestionId,answerDraft,serverAnswer:player.myAnswer,locked:player.locked});
+    draftQuestionId=draft.draftQuestionId;answerDraft=draft.answerDraft;
+    if(draft.shouldWrite&&input.value!==answerDraft)input.value=answerDraft;
+    input.disabled=player.locked; $("lock-btn").disabled=player.locked;
+    $("lock-status").textContent=player.locked?"✓ Locked in — waiting for the others":"Your answer stays private until reveal.";
+    if(draft.shouldFocus)setTimeout(()=>input.focus(),0);
+  }
 }
 
 function renderReveal() {
@@ -80,6 +90,8 @@ const saved=loadSettings();$("name-input").value=saved.name||"";$("spectator-inp
 for(let i=6;i<=20;i++)$("count-select").add(new Option(`${i} rounds`,i,i===10,i===10));
 for(const c of game.CATEGORIES){const label=document.createElement("label");label.innerHTML=`<input type="checkbox" data-category value="${c}" checked> ${c}`;$("category-list").appendChild(label)}
 for(const t of THEMES){const label=document.createElement("label");label.innerHTML=`<input type="checkbox" data-theme value="${t}"> ${t}`;$("theme-list").appendChild(label)}
-$("create-btn").onclick=create;$("join-btn").onclick=join;$("lock-btn").onclick=()=>act("answer",{answer:$("answer-input").value});$("answer-input").onkeydown=(e)=>{if(e.key==="Enter")$("lock-btn").click()};
+$("create-btn").onclick=create;$("join-btn").onclick=join;$("lock-btn").onclick=()=>act("answer",{answer:$("answer-input").value});
+$("answer-input").oninput=(e)=>{answerDraft=e.target.value};
+$("answer-input").onkeydown=(e)=>{if(e.key==="Enter")$("lock-btn").click()};
 $("start-btn").onclick=()=>{const settings=gameSettings();if(!settings.categories.length)return toast("Choose at least one category.");saveSettings({...readSettings(),...settings});act("start",{settings})};$("next-btn").onclick=()=>act("advance",{});$("again-btn").onclick=()=>act("again",{});$("reset-history-btn").onclick=()=>{resetUsedIds();toast("Question history reset")};
 const queryCode=normalizeCode(new URLSearchParams(location.search).get("room"));if(queryCode.length===4)$("code-input").value=queryCode;
