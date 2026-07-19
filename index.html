@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Trivia Time</title>
+  <meta name="description" content="Free-response multiplayer trivia with popular movies and Filipino categories.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<main id="app">
+  <section id="screen-home" class="screen">
+    <p class="eyebrow">GONAPPS PARTY GAME</p>
+    <h1>Trivia <span>Time</span></h1>
+    <p class="lead">No choices. Type what you know.</p>
+    <div class="panel">
+      <label for="name-input">Your name</label>
+      <input id="name-input" maxlength="20" autocomplete="nickname" placeholder="e.g. Sam">
+      <label class="check"><input id="spectator-input" type="checkbox"> Run as Host display only</label>
+      <button id="create-btn" class="btn primary">Create room</button>
+      <div class="divider">or join</div>
+      <label for="code-input">Room code</label>
+      <div class="row"><input id="code-input" maxlength="4" placeholder="ABCD"><button id="join-btn" class="btn">Join</button></div>
+    </div>
+    <details><summary>How to play</summary><p>Everyone types an answer in secret. The Host automatically checks aliases and likely typos, then reveals every accepted answer. Correct answers earn one point.</p></details>
+  </section>
+
+  <section id="screen-lobby" class="screen hidden">
+    <h2>Room <span id="room-code">----</span></h2>
+    <div class="invite panel">
+      <img id="qr-image" width="180" height="180" alt="QR code for joining this room">
+      <div><p>Scan to join</p><button id="copy-btn" class="btn small">Copy join link</button></div>
+    </div>
+    <div id="lobby-roster" class="roster"></div>
+    <div id="host-settings" class="panel hidden">
+      <h3>Game setup</h3>
+      <fieldset><legend>Categories</legend><div id="category-list" class="checks"></div></fieldset>
+      <fieldset><legend>Movie & book themes <small>(optional)</small></legend><div id="theme-list" class="checks"></div></fieldset>
+      <div class="settings-grid">
+        <label>Rounds<select id="count-select"></select></label>
+        <label>Question time<select id="timer-select"><option value="0">No timer</option><option value="20">20 sec</option><option value="30" selected>30 sec</option><option value="45">45 sec</option><option value="60">60 sec</option></select></label>
+        <label>After reveal<select id="advance-select"><option value="0">Host taps Next</option><option value="5">Auto: 5 sec</option><option value="8">Auto: 8 sec</option><option value="12">Auto: 12 sec</option></select></label>
+      </div>
+      <button id="reset-history-btn" class="btn small">Reset question history</button>
+      <button id="start-btn" class="btn primary">Start game</button>
+    </div>
+    <p id="lobby-message" class="muted"></p>
+  </section>
+
+  <section id="screen-question" class="screen hidden">
+    <header><span id="progress"></span><span id="category-chip" class="chip"></span></header>
+    <div id="timer" class="timer hidden"><div></div><span></span></div>
+    <p id="theme-label" class="eyebrow"></p>
+    <h2 id="question-prompt" class="question"></h2>
+    <div id="answer-area" class="panel">
+      <label for="answer-input">Your answer</label>
+      <div class="row"><input id="answer-input" maxlength="100" autocomplete="off"><button id="lock-btn" class="btn primary">Lock answer</button></div>
+      <p id="lock-status" class="muted"></p>
+    </div>
+    <div id="question-roster" class="roster"></div>
+  </section>
+
+  <section id="screen-reveal" class="screen hidden">
+    <p id="reveal-category" class="eyebrow"></p>
+    <h2 id="reveal-prompt" class="question"></h2>
+    <div class="answer-card"><span>Accepted answer<span id="answer-plural"></span></span><strong id="accepted-answers"></strong><p id="explanation"></p></div>
+    <div id="result-list" class="results"></div>
+    <div id="reveal-timer" class="timer hidden"><div></div><span></span></div>
+    <button id="next-btn" class="btn primary hidden">Next question</button>
+  </section>
+
+  <section id="screen-over" class="screen hidden">
+    <p class="eyebrow">FINAL SCORE</p><h2 id="winner-title"></h2>
+    <div id="standings" class="results"></div>
+    <button id="again-btn" class="btn primary hidden">Play again</button>
+  </section>
+</main>
+<div id="toast" class="toast hidden" role="status"></div>
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.5/dist/peerjs.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
