@@ -208,9 +208,9 @@ automatic reveal advancement, narrow mobile layout, and optional image alt text.
 
 ## Content Plan
 
-Launch with at least 330 curated questions:
+Launch with at least 400 curated questions:
 
-- 15 or more in each of the fifteen top-level categories;
+- 15 or more in each of the seventeen top-level categories;
 - at least 10 questions in each popular Movie theme: Star Wars, Marvel
   Cinematic Universe, Disney & Pixar, The Lord of the Rings, Jurassic Park,
   and Studio Ghibli;
@@ -218,11 +218,12 @@ Launch with at least 330 curated questions:
   general Movies game remains varied;
 - at least 10 Harry Potter questions within Books;
 - at least 20 Music questions;
+- at least 20 Japan Culture questions;
 - at least 10 TV Show questions in each named theme: Friends, Grey's Anatomy,
   Young Sheldon, The Big Bang Theory, and How I Met Your Mother;
 - at least 15 questions each for Philippine History, Philippine Geography,
-  Filipino Culture & Language, Filipino Entertainment, and Filipino Food &
-  Drink;
+  Filipino Culture & Language, Filipino Entertainment, Filipino Food & Drink,
+  and Philippine Literature;
 - enough additional general Books questions that enabling the category does
   not effectively force its named theme.
 

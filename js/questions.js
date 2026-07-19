@@ -408,5 +408,51 @@ add("Filipino Food & Drink", [
   ["What Filipino refreshment combines tapioca pearls and jelly in a sweet drink?", "Sago't gulaman", null, ["sago at gulaman", "sago gulaman"]],
 ]);
 
+add("Japan Culture", [
+  ["What is the traditional Japanese tea ceremony commonly called?", "Chanoyu", null, ["chado", "sadō", "sado", "the way of tea"]],
+  ["What traditional Japanese robe wraps left over right and is secured with an obi?", "Kimono"],
+  ["What lightweight casual robe is often worn at summer festivals and hot springs?", "Yukata"],
+  ["What is the Japanese custom of viewing cherry blossoms?", "Hanami", null, ["flower viewing"]],
+  ["What gate commonly marks the entrance to a Shinto shrine?", "Torii", null, ["torii gate"]],
+  ["What woven straw mats traditionally cover Japanese room floors?", "Tatami", null, ["tatami mats"]],
+  ["What is the Japanese art of paper folding?", "Origami"],
+  ["What is the Japanese art of flower arrangement?", "Ikebana", null, ["kado", "kadō"]],
+  ["What is the highest rank in professional sumo?", "Yokozuna"],
+  ["What three-line poetry form traditionally follows a 5-7-5 sound pattern?", "Haiku"],
+  ["What Japanese theater form is known for elaborate makeup and stylized performance?", "Kabuki"],
+  ["What classical Japanese theater form uses masks and restrained movement?", "Noh", null, ["Nō", "Noh theater"]],
+  ["What Japanese word refers to comics or graphic narratives?", "Manga"],
+  ["What Japanese term is used for animation?", "Anime"],
+  ["What is a Japanese hot-spring bath called?", "Onsen", null, ["hot spring"]],
+  ["What paper fortune can visitors draw at Japanese shrines and temples?", "Omikuji", null, ["o-mikuji"]],
+  ["What wooden plaque is used to write wishes at a Shinto shrine?", "Ema", null, ["ema plaque"]],
+  ["What bean-throwing ritual is performed during Setsubun?", "Mamemaki", null, ["bean throwing"]],
+  ["What star festival celebrates the meeting of Orihime and Hikoboshi?", "Tanabata", null, ["Star Festival"]],
+  ["What boxed assortment of special dishes is traditionally eaten at Japanese New Year?", "Osechi", null, ["osechi ryori", "osechi-ryōri"]],
+]);
+
+add("Philippine Literature", [
+  ["Who wrote Noli Me Tángere?", "José Rizal", null, ["Jose Rizal", "Rizal"]],
+  ["What novel is the sequel to Noli Me Tángere?", "El Filibusterismo", null, ["El Fili"]],
+  ["Who wrote Florante at Laura?", "Francisco Balagtas", null, ["Francisco Baltazar", "Balagtas", "Baltazar"]],
+  ["Who is the traditionally listed author of Ibong Adarna?", "Anonymous", null, ["unknown", "unknown author", "anon"]],
+  ["What Ilocano epic follows the hero Lam-ang?", "Biag ni Lam-ang", null, ["Biag ni Lam Ang"]],
+  ["What Ifugao epic chants are traditionally performed during harvest and funerals?", "Hudhud", null, ["Hudhud chants"]],
+  ["What Maranao epic recounts the adventures of Prince Bantugan?", "Darangen", null, ["the Darangen"]],
+  ["Who wrote the short story Dead Stars?", "Paz Márquez-Benítez", null, ["Paz Marquez Benitez", "Marquez-Benitez"]],
+  ["Who wrote Footnote to Youth?", "José García Villa", null, ["Jose Garcia Villa", "Garcia Villa"]],
+  ["Who wrote How My Brother Leon Brought Home a Wife?", "Manuel Arguilla", null, ["Manuel E. Arguilla", "Arguilla"]],
+  ["Who wrote The Woman Who Had Two Navels?", "Nick Joaquin", null, ["Joaquin"]],
+  ["Who wrote Mga Ibong Mandaragit?", "Amado V. Hernandez", null, ["Amado Hernandez", "Hernandez"]],
+  ["Who wrote the novel Dekada '70?", "Lualhati Bautista", null, ["Bautista"]],
+  ["Who wrote Smaller and Smaller Circles?", "F. H. Batacan", null, ["FH Batacan", "Felisa Batacan", "Batacan"]],
+  ["Who wrote Banaag at Sikat?", "Lope K. Santos", null, ["Lope Santos", "Santos"]],
+  ["Who wrote America Is in the Heart?", "Carlos Bulosan", null, ["Bulosan"]],
+  ["Who wrote Without Seeing the Dawn?", "Stevan Javellana", null, ["Javellana"]],
+  ["Who wrote the novel Po-on?", "F. Sionil José", null, ["F Sionil Jose", "Francisco Sionil Jose", "Sionil Jose"]],
+  ["Who created the stories Mga Kuwento ni Lola Basyang?", "Severino Reyes", null, ["Reyes"]],
+  ["Which poet is known as the Prince of Tagalog Poets?", "Francisco Balagtas", null, ["Francisco Baltazar", "Balagtas", "Baltazar"]],
+]);
+
 export const QUESTIONS = bank;
 export const THEMES = [...new Set(bank.map((q) => q.theme).filter(Boolean))];

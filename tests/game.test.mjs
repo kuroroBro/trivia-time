@@ -12,8 +12,8 @@ function started(count = 6) {
   return room;
 }
 
-test("bank has at least 20 questions in all 15 categories", () => {
-  assert.equal(QUESTIONS.length, 385);
+test("bank has at least 20 questions in all 17 categories", () => {
+  assert.equal(QUESTIONS.length, 425);
   for (const category of game.CATEGORIES) assert.ok(QUESTIONS.filter((q) => q.category === category).length >= 20, category);
   for (const theme of ["Star Wars", "Marvel Cinematic Universe", "Disney & Pixar", "The Lord of the Rings", "Jurassic Park", "Studio Ghibli", "Friends", "Grey's Anatomy", "Young Sheldon", "The Big Bang Theory", "How I Met Your Mother"]) {
     assert.ok(QUESTIONS.filter((q) => q.theme === theme).length >= 10, theme);
@@ -22,9 +22,12 @@ test("bank has at least 20 questions in all 15 categories", () => {
 
 test("general and Filipino categories are separate exhaustive groups", () => {
   assert.equal(game.GENERAL_CATEGORIES.includes("Food & Drink"), true);
+  assert.equal(game.GENERAL_CATEGORIES.includes("Japan Culture"), true);
   assert.equal(game.GENERAL_CATEGORIES.includes("Filipino Food & Drink"), false);
   assert.equal(game.FILIPINO_CATEGORIES.includes("Filipino Food & Drink"), true);
+  assert.equal(game.FILIPINO_CATEGORIES.includes("Philippine Literature"), true);
   assert.equal(game.FILIPINO_CATEGORIES.includes("Food & Drink"), false);
+  assert.equal(game.FILIPINO_CATEGORIES.includes("Japan Culture"), false);
   assert.deepEqual([...game.GENERAL_CATEGORIES, ...game.FILIPINO_CATEGORIES], game.CATEGORIES);
 });
 
