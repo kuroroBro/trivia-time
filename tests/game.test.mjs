@@ -13,11 +13,11 @@ function started(count = 6) {
 }
 
 test("bank has at least 30 questions in all 17 categories", () => {
-  assert.equal(QUESTIONS.length, 575);
+  assert.equal(QUESTIONS.length, 815);
   for (const category of game.CATEGORIES) assert.ok(QUESTIONS.filter((q) => q.category === category).length >= 30, category);
   assert.equal(new Set(QUESTIONS.map((q) => q.prompt)).size, QUESTIONS.length, "question prompts must not repeat");
-  for (const theme of ["Star Wars", "Marvel Cinematic Universe", "Disney & Pixar", "The Lord of the Rings", "Jurassic Park", "Studio Ghibli", "Friends", "Grey's Anatomy", "Young Sheldon", "The Big Bang Theory", "How I Met Your Mother"]) {
-    assert.ok(QUESTIONS.filter((q) => q.theme === theme).length >= 10, theme);
+  for (const theme of ["Star Wars", "Marvel Cinematic Universe", "Disney & Pixar", "The Lord of the Rings", "Jurassic Park", "Studio Ghibli", "Harry Potter", "Friends", "Grey's Anatomy", "Young Sheldon", "The Big Bang Theory", "How I Met Your Mother"]) {
+    assert.ok(QUESTIONS.filter((q) => q.theme === theme).length >= 30, theme);
   }
 });
 

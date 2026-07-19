@@ -208,18 +208,19 @@ automatic reveal advancement, narrow mobile layout, and optional image alt text.
 
 ## Content Plan
 
-Launch with at least 550 curated questions:
+Launched with at least 550 curated questions, later expanded (see Changelog)
+to at least 815:
 
 - 30 or more in each of the seventeen top-level categories;
-- at least 10 questions in each popular Movie theme: Star Wars, Marvel
+- at least 30 questions in each popular Movie theme: Star Wars, Marvel
   Cinematic Universe, Disney & Pixar, The Lord of the Rings, Jurassic Park,
   and Studio Ghibli;
 - at least 15 additional Movies questions outside those named themes so a
   general Movies game remains varied;
-- at least 10 Harry Potter questions within Books;
+- at least 30 Harry Potter questions within Books;
 - at least 30 Music questions;
 - at least 30 Japan Culture questions;
-- at least 10 TV Show questions in each named theme: Friends, Grey's Anatomy,
+- at least 30 TV Show questions in each named theme: Friends, Grey's Anatomy,
   Young Sheldon, The Big Bang Theory, and How I Met Your Mother;
 - at least 30 questions each for Philippine History, Philippine Geography,
   Filipino Culture & Language, Filipino Entertainment, Filipino Food & Drink,
@@ -248,3 +249,17 @@ variant. Store meaningful aliases for reveal and mechanical variants as
 5. Build screens, automatic reveal, and Host correction interaction.
 6. Curate and validate the initial question bank.
 7. Complete unit, accessibility, responsive, and live multi-browser checks.
+
+## Changelog
+
+- **v2** (2026-07-19): Expanded every named Movie/TV theme from 10 to 30
+  questions each (240 new questions total, bank now 815), per owner
+  feedback. Content was verified against external sources for the
+  higher-risk facts (character names, plot specifics, real-world release
+  years) before shipping, and a couple of drafted questions were corrected
+  or replaced after that check turned up inaccuracies (e.g. an early draft
+  misattributed Ted Mosby's architecture-firm boss to the wrong How I Met
+  Your Mother character, and understated the Slap Bet's final total).
+  `tests/game.test.mjs`'s theme-count assertion was raised from `>= 10` to
+  `>= 30` and now also covers Harry Potter, which the original assertion
+  omitted.
