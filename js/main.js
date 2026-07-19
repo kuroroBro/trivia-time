@@ -2,11 +2,12 @@ import * as game from "./game.js";
 import { reconcileDraft } from "./draft.js";
 import { QUESTIONS, THEMES } from "./questions.js";
 import { hostRoom, joinRoom, normalizeCode } from "./room.js";
+import { unlockAudio, playGameStart } from "./sound.js";
 import { createResumeToken, loadSession, loadSettings, loadUsedIds, markUsedIds, resetUsedIds, saveSession, saveSettings } from "./storage.js";
 
 const HOST_ID = "host";
 const $ = (id) => document.getElementById(id);
-let isHost = false, room = null, net = null, state = null, stateReceivedAt = Date.now(), myId = null, activeToken = null, raf = null, autoAdvancedFor = null;
+let isHost = false, room = null, net = null, state = null, stateReceivedAt = Date.now(), myId = null, activeToken = null, raf = null, autoAdvancedFor = null, lastPhase = null;
 let draftQuestionId = null, answerDraft = "";
 const screens = ["home", "lobby", "question", "reveal", "over"];
 const show = (name) => screens.forEach((x) => $(`screen-${x}`).classList.toggle("hidden", x !== name));
@@ -59,7 +60,11 @@ function renderReveal() {
 
 function renderOver(){ const winners=state.standings.filter((p)=>state.winnerIds.includes(p.id)); $("winner-title").textContent=winners.length===1?`${winners[0].name} wins!`:`${winners.map((p)=>p.name).join(" & ")} tie!`; const list=$("standings");list.innerHTML="";state.standings.forEach((p,i)=>{const row=document.createElement("div");row.className="result rank";row.textContent=`${i+1}. ${p.name} — ${p.score} point${p.score===1?"":"s"}`;list.appendChild(row)});$("again-btn").classList.toggle("hidden",myId!==state.hostId)}
 
-function render(){ if(!state)return; cancelAnimationFrame(raf); show(state.phase); if(state.phase==="lobby")renderLobby();if(state.phase==="question")renderQuestion();if(state.phase==="reveal")renderReveal();if(state.phase==="over")renderOver();tick(); }
+// The quiz actually begins the moment everyone leaves the lobby for the
+// first question — fires once per game (including a replay via "Play
+// again", which resets to "lobby" first), never on the timer-driven
+// re-renders that already happen throughout "question".
+function render(){ if(!state){lastPhase=null;return;} if(state.phase==="question"&&lastPhase==="lobby")playGameStart(); lastPhase=state.phase; cancelAnimationFrame(raf); show(state.phase); if(state.phase==="lobby")renderLobby();if(state.phase==="question")renderQuestion();if(state.phase==="reveal")renderReveal();if(state.phase==="over")renderOver();tick(); }
 function tick(){
   if(!state)return; const now=state.hostNow+(Date.now()-stateReceivedAt);
   if(state.phase==="question"&&state.questionDeadlineAt){const left=Math.max(0,state.questionDeadlineAt-now),total=state.settings.timerSeconds*1000;$("timer").classList.remove("hidden");$("timer").style.setProperty("--pct",`${left/total*100}%`);$("timer").querySelector("span").textContent=`${Math.ceil(left/1000)}s`;if(left<=0&&isHost)act("tick",{});}
@@ -83,8 +88,8 @@ function handle(playerId,event,payload={}){
 }
 async function act(event,payload){const res=isHost?handle(myId,event,payload):await net.send(event,payload);if(!res?.ok)toast(res?.error||"That didn't work.");return res;}
 
-async function create(){const settings=readSettings();if(!settings.spectatorHost&&!settings.name.trim())return toast("Enter your name.");$("create-btn").disabled=true;try{isHost=true;myId=HOST_ID;net=await hostRoom({onMessage:handle,onPeerClose:(id)=>{game.disconnectPlayer(room,id);push()},onError:toast});room=game.createRoom(net.code,HOST_ID);if(!settings.spectatorHost){activeToken=createResumeToken();game.addPlayer(room,HOST_ID,settings.name,activeToken);}state=game.toPublicState(room,myId);render();}catch(e){toast(e.message);isHost=false;}finally{$("create-btn").disabled=false}}
-async function join(){const code=normalizeCode($("code-input").value),name=$("name-input").value.trim();if(code.length!==4||!name)return toast("Enter your name and 4-character room code.");try{isHost=false;const saved=loadSession(code);activeToken=saved?.resumeToken||createResumeToken();net=await joinRoom(code,{onPush:(e,p)=>{if(e==="state")applyState(p)},onClose:toast});myId=net.id;const res=await net.send("join",{name,resumeToken:activeToken});if(!res.ok)throw new Error(res.error);saveSession(code,{resumeToken:activeToken,name});applyState(res.state);}catch(e){toast(e.message)}}
+async function create(){unlockAudio();const settings=readSettings();if(!settings.spectatorHost&&!settings.name.trim())return toast("Enter your name.");$("create-btn").disabled=true;try{isHost=true;myId=HOST_ID;net=await hostRoom({onMessage:handle,onPeerClose:(id)=>{game.disconnectPlayer(room,id);push()},onError:toast});room=game.createRoom(net.code,HOST_ID);if(!settings.spectatorHost){activeToken=createResumeToken();game.addPlayer(room,HOST_ID,settings.name,activeToken);}state=game.toPublicState(room,myId);render();}catch(e){toast(e.message);isHost=false;}finally{$("create-btn").disabled=false}}
+async function join(){unlockAudio();const code=normalizeCode($("code-input").value),name=$("name-input").value.trim();if(code.length!==4||!name)return toast("Enter your name and 4-character room code.");try{isHost=false;const saved=loadSession(code);activeToken=saved?.resumeToken||createResumeToken();net=await joinRoom(code,{onPush:(e,p)=>{if(e==="state")applyState(p)},onClose:toast});myId=net.id;const res=await net.send("join",{name,resumeToken:activeToken});if(!res.ok)throw new Error(res.error);saveSession(code,{resumeToken:activeToken,name});applyState(res.state);}catch(e){toast(e.message)}}
 function readSettings(){const saved=loadSettings();return{...saved,name:$("name-input").value,spectatorHost:$("spectator-input").checked}}
 function gameSettings(){return{categories:[...document.querySelectorAll("[data-category]:checked")].map((x)=>x.value),themes:[...document.querySelectorAll("[data-theme]:checked")].map((x)=>x.value),questionCount:Number($("count-select").value),timerSeconds:Number($("timer-select").value),revealAdvanceSeconds:Number($("advance-select").value)}}
 
