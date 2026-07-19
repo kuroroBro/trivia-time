@@ -15,6 +15,13 @@ test("accepts explicit aliases and conservative typos", () => {
   assert.equal(judgeAnswer("cat", q("car")).correct, false);
 });
 
+test("accepts cacao aliases for the chocolate bean question", () => {
+  const chocolate = q("Cocoa bean", ["Cocoa bean", "cacao", "cacao bean", "cacao beans", "cocoa", "cocoa beans"]);
+  for (const answer of ["cacao", "cacao bean", "cacao beans", "cocoa", "cocoa beans"]) {
+    assert.equal(judgeAnswer(answer, chocolate).correct, true, answer);
+  }
+});
+
 test("years require an exact four digit answer", () => {
   const year = q("1997", ["1997"], { mode: "year" });
   assert.equal(judgeAnswer("1997", year).correct, true);

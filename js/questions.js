@@ -168,7 +168,7 @@ add("Food & Drink", [
   ["What dairy product is churned to make butter?", "Cream"],
   ["Which fruit has varieties called Hass and Fuerte?", "Avocado"],
   ["What is the Italian word for ice cream?", "Gelato"],
-  ["Which bean is used to make chocolate?", "Cocoa bean", null, ["cacao bean", "cocoa"]],
+  ["Which bean is used to make chocolate?", "Cocoa bean", null, ["cacao", "cacao bean", "cacao beans", "cocoa", "cocoa beans"]],
 ]);
 
 add("Animals", [

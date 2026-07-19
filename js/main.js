@@ -45,7 +45,7 @@ function renderQuestion() {
 
 function renderReveal() {
   const r=state.lastResult; $("reveal-category").textContent=[r.category,r.theme].filter(Boolean).join(" · "); $("reveal-prompt").textContent=r.prompt;
-  $("answer-plural").textContent=r.acceptedAnswers.length>1?"s":""; $("accepted-answers").textContent=r.acceptedAnswers.join(" • "); $("explanation").textContent=r.explanation;
+  $("answer-label").textContent=r.acceptedAnswers.length>1?"Accepted answers":"Accepted answer"; $("accepted-answers").textContent=r.acceptedAnswers.join(" • "); $("explanation").textContent=r.explanation;
   const list=$("result-list"); list.innerHTML="";
   for(const res of r.results){ const row=document.createElement("div"); row.className=`result${res.correct?" correct":""}`;
     const name=document.createElement("strong"); name.textContent=`${res.correct?"✓":"✕"} ${res.name}`; const response=document.createElement("span"); response.className="response"; response.textContent=`${res.answerText||"No answer"} · ${res.reason}`;
