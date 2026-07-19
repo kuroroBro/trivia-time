@@ -21,7 +21,7 @@
       <button id="create-btn" class="btn primary">Create room</button>
       <div class="divider">or join</div>
       <label for="code-input">Room code</label>
-      <div class="row"><input id="code-input" maxlength="4" placeholder="ABCD"><button id="join-btn" class="btn">Join</button></div>
+      <div class="row join-row"><input id="code-input" maxlength="4" placeholder="ABCD"><button id="join-btn" class="btn primary">Join</button></div>
     </div>
     <details><summary>How to play</summary><p>Everyone types an answer in secret. The Host automatically checks aliases and likely typos, then reveals every accepted answer. Correct answers earn one point.</p></details>
   </section>
@@ -64,7 +64,7 @@
   <section id="screen-reveal" class="screen hidden">
     <p id="reveal-category" class="eyebrow"></p>
     <h2 id="reveal-prompt" class="question"></h2>
-    <div class="answer-card"><span>Accepted answer<span id="answer-plural"></span></span><strong id="accepted-answers"></strong><p id="explanation"></p></div>
+    <div class="answer-card"><span id="answer-label">Accepted answer</span><strong id="accepted-answers"></strong><p id="explanation"></p></div>
     <div id="result-list" class="results"></div>
     <div id="reveal-timer" class="timer hidden"><div></div><span></span></div>
     <button id="next-btn" class="btn primary hidden">Next question</button>
