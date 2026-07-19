@@ -23,7 +23,7 @@ available if that image fails.
 node --test tests/*.test.mjs
 ```
 
-The question bank contains 365 questions across fourteen categories,
+The question bank contains 385 questions across fifteen categories,
 including Music, TV Shows, ten questions in every named TV and popular-movie
-theme, and four Filipino categories. The SDD lives in
+theme, and five Filipino categories. The SDD lives in
 [`specs/001-trivia-time`](specs/001-trivia-time/).

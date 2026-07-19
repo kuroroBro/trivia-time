@@ -4,7 +4,7 @@ export const MAX_PLAYERS = 12;
 export const CATEGORIES = [
   "Movies", "Books", "The '90s", "Food & Drink", "Animals", "Science",
   "Sports", "Music", "TV Shows", "General Knowledge", "Philippine History", "Philippine Geography",
-  "Filipino Culture & Language", "Filipino Entertainment",
+  "Filipino Culture & Language", "Filipino Entertainment", "Filipino Food & Drink",
 ];
 
 const fail = (error) => ({ ok: false, error });

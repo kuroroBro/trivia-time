@@ -41,6 +41,7 @@ The initial question bank supports these top-level categories:
 | Philippine Geography | Regions, provinces, cities, islands, bodies of water, landmarks, and natural features |
 | Filipino Culture & Language | Filipino languages, customs, festivals, mythology, traditions, inventions, and everyday culture |
 | Filipino Entertainment | Pinoy movies and television, OPM, artists, celebrities, iconic characters, and popular media |
+| Filipino Food & Drink | Filipino dishes, desserts, ingredients, street food, regional specialties, and refreshments |
 
 `category` is always one of the top-level values. `theme` is optional and
 narrows a question within a category, such as `Star Wars` under Movies or
@@ -59,7 +60,7 @@ about widely known films, actors, characters, quotes described without copying
 long dialogue, awards, settings, and release history. No single franchise may
 occupy more than one third of an unrestricted Movies deck.
 
-The four Filipino categories are first-class top-level filters and may be
+The five Filipino categories are first-class top-level filters and may be
 combined into an all-Filipino game. Filipino questions may use familiar
 Filipino terms in their prompts, but instructions and explanations remain
 clear to both Filipino and English readers. Where an answer has Filipino,

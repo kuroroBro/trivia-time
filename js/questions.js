@@ -385,5 +385,28 @@ add("TV Shows", [
   ["What was Robin's Canadian pop-star name?", "Robin Sparkles", "How I Met Your Mother"],
 ]);
 
+add("Filipino Food & Drink", [
+  ["What Filipino dessert mixes shaved ice with milk and assorted sweets?", "Halo-halo", null, ["halo halo"]],
+  ["What Filipino soup is known for its distinctly sour broth?", "Sinigang"],
+  ["Which fruit is a common traditional souring ingredient for sinigang?", "Tamarind", null, ["sampalok"]],
+  ["What Filipino celebration dish is a whole roasted pig?", "Lechon", null, ["lechon baboy"]],
+  ["What Filipino snack is a fried or fresh spring roll?", "Lumpia", null, ["spring roll", "spring rolls"]],
+  ["What general Filipino term refers to noodle dishes?", "Pancit", null, ["pansit"]],
+  ["Which Filipino stew is traditionally served with a thick peanut sauce?", "Kare-kare", null, ["kare kare"]],
+  ["What fermented fish or shrimp paste commonly accompanies kare-kare?", "Bagoong", null, ["shrimp paste", "fish paste"]],
+  ["What small Philippine citrus fruit is commonly used for juice and seasoning?", "Calamansi", null, ["kalamansi", "Philippine lime"]],
+  ["What purple yam is used in many Filipino desserts?", "Ube", null, ["purple yam"]],
+  ["What Filipino rice cake is traditionally baked in a clay pot lined with banana leaves?", "Bibingka"],
+  ["What small Filipino steamed rice cake is commonly eaten as a snack?", "Puto"],
+  ["What street food combines silken tofu, arnibal, and sago pearls?", "Taho"],
+  ["What Filipino delicacy is a fertilized duck egg cooked in its shell?", "Balut"],
+  ["Which sizzling chopped-pork dish originated in Pampanga?", "Sisig"],
+  ["Which grilled chicken dish is especially associated with Bacolod?", "Chicken inasal", null, ["inasal", "inasal na manok"]],
+  ["What spicy Bicolano dish combines pork, chilies, and coconut milk?", "Bicol Express", null, ["Bikol Express"]],
+  ["What Bicolano dish cooks dried taro leaves in coconut milk?", "Laing"],
+  ["What Filipino preparation cures raw seafood with vinegar or citrus?", "Kinilaw", null, ["kilawin"]],
+  ["What Filipino refreshment combines tapioca pearls and jelly in a sweet drink?", "Sago't gulaman", null, ["sago at gulaman", "sago gulaman"]],
+]);
+
 export const QUESTIONS = bank;
 export const THEMES = [...new Set(bank.map((q) => q.theme).filter(Boolean))];

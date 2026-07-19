@@ -12,8 +12,8 @@ function started(count = 6) {
   return room;
 }
 
-test("bank has at least 20 questions in all 14 categories", () => {
-  assert.equal(QUESTIONS.length, 365);
+test("bank has at least 20 questions in all 15 categories", () => {
+  assert.equal(QUESTIONS.length, 385);
   for (const category of game.CATEGORIES) assert.ok(QUESTIONS.filter((q) => q.category === category).length >= 20, category);
   for (const theme of ["Star Wars", "Marvel Cinematic Universe", "Disney & Pixar", "The Lord of the Rings", "Jurassic Park", "Studio Ghibli", "Friends", "Grey's Anatomy", "Young Sheldon", "The Big Bang Theory", "How I Met Your Mother"]) {
     assert.ok(QUESTIONS.filter((q) => q.theme === theme).length >= 10, theme);

@@ -26,8 +26,8 @@
   matching options, explanations, sources, and image accessibility.
 - [ ] Curate at least 15 questions each for Movies, Books, The '90s, Food &
   Drink, Animals, Science, Sports, Music, TV Shows, General Knowledge, Philippine History,
-  Philippine Geography, Filipino Culture & Language, and Filipino
-  Entertainment.
+  Philippine Geography, Filipino Culture & Language, Filipino Entertainment,
+  and Filipino Food & Drink.
 - [ ] Include at least 10 questions each for Star Wars, Marvel Cinematic
   Universe, Disney & Pixar, The Lord of the Rings, Jurassic Park, and Studio
   Ghibli, plus at least 15 general Movie questions outside those themes.
