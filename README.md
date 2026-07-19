@@ -27,8 +27,13 @@ available if that image fails.
 node --test tests/*.test.mjs
 ```
 
-The question bank contains 425 questions across seventeen categories,
+The question bank contains 575 questions across seventeen categories, with at
+least 30 questions in every top-level category,
 including Music, TV Shows, ten questions in every named TV and popular-movie
 theme, Japan Culture, and six Filipino categories including Philippine
 Literature. The SDD lives in
 [`specs/001-trivia-time`](specs/001-trivia-time/).
+
+The Host device remembers played questions to avoid repeats between games. The
+lobby's question-history reset shows the number remembered and clears only
+that history; saved categories, timers, Host role, and name remain intact.

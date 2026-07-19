@@ -45,7 +45,10 @@
         <label>Question time<select id="timer-select"><option value="0">No timer</option><option value="20">20 sec</option><option value="30" selected>30 sec</option><option value="45">45 sec</option><option value="60">60 sec</option></select></label>
         <label>After reveal<select id="advance-select"><option value="0">Host taps Next</option><option value="5">Auto: 5 sec</option><option value="8">Auto: 8 sec</option><option value="12">Auto: 12 sec</option></select></label>
       </div>
-      <button id="reset-history-btn" class="btn small">Reset question history</button>
+      <div class="history-tools">
+        <button id="reset-history-btn" class="btn small">Reset question history</button>
+        <small>Clears played-question history only; your setup stays saved.</small>
+      </div>
       <button id="start-btn" class="btn primary">Start game</button>
     </div>
     <p id="lobby-message" class="muted"></p>

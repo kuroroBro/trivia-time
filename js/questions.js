@@ -1,5 +1,5 @@
-// Compact curated launch bank. Each category has 20 questions so any single
-// category can support the maximum game length without repeats.
+// Curated question bank. Every top-level category has at least 30 questions so
+// a single-category game can run multiple sessions before history is exhausted.
 const bank = [];
 const slug = (s) => s.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 function add(category, rows) {
@@ -246,7 +246,7 @@ add("General Knowledge", [
   ["What is the currency of Japan?", "Yen", null, ["Japanese yen"]], ["Who painted the Mona Lisa?", "Leonardo da Vinci", null, ["da Vinci", "Leonardo"]],
   ["What is the smallest prime number?", "Two", null, ["2"]], ["Which ocean is the largest?", "Pacific Ocean", null, ["Pacific"]],
   ["What is the capital of New Zealand?", "Wellington"], ["Which country is shaped like a boot?", "Italy"],
-  ["What is the Roman numeral for fifty?", "L"], ["Who composed The Four Seasons?", "Antonio Vivaldi", null, ["Vivaldi"]],
+  ["What is the Roman numeral for fifty?", "L"], ["Which artist sculpted the Renaissance statue David?", "Michelangelo", null, ["Michelangelo Buonarroti"]],
   ["What is the tallest mountain above sea level?", "Mount Everest", null, ["Everest"]], ["Which desert covers much of northern Africa?", "Sahara", null, ["Sahara Desert"]],
   ["What is the capital of Brazil?", "Brasília", null, ["Brasilia"]], ["Which metal is liquid at room temperature?", "Mercury"],
   ["How many sides does a dodecagon have?", "Twelve", null, ["12"]], ["What is the largest country by land area?", "Russia"],
@@ -254,7 +254,7 @@ add("General Knowledge", [
 ]);
 
 add("Philippine History", [
-  ["Who wrote Noli Me Tángere?", "José Rizal", null, ["Jose Rizal", "Rizal"]], ["What secret society did Andrés Bonifacio found?", "Katipunan", null, ["KKK"]],
+  ["Who wrote the Kartilya ng Katipunan?", "Emilio Jacinto", null, ["Jacinto"]], ["What secret society did Andrés Bonifacio found?", "Katipunan", null, ["KKK"]],
   ["On what date is Philippine Independence Day celebrated?", "June 12", null, ["12 June"]], ["Who was the first President of the Philippine Republic?", "Emilio Aguinaldo", null, ["Aguinaldo"]],
   ["In what city was the 1898 declaration of independence proclaimed?", "Kawit", null, ["Kawit, Cavite"]], ["Who is known as the Great Plebeian?", "Andrés Bonifacio", null, ["Andres Bonifacio", "Bonifacio"]],
   ["What was the precolonial writing system used by many Tagalog speakers?", "Baybayin"], ["Who painted the Spoliarium?", "Juan Luna", null, ["Luna"]],
@@ -452,6 +452,201 @@ add("Philippine Literature", [
   ["Who wrote the novel Po-on?", "F. Sionil José", null, ["F Sionil Jose", "Francisco Sionil Jose", "Sionil Jose"]],
   ["Who created the stories Mga Kuwento ni Lola Basyang?", "Severino Reyes", null, ["Reyes"]],
   ["Which poet is known as the Prince of Tagalog Poets?", "Francisco Balagtas", null, ["Francisco Baltazar", "Balagtas", "Baltazar"]],
+]);
+
+add("Books", [
+  ["Who wrote The Picture of Dorian Gray?", "Oscar Wilde", null, ["Wilde"]],
+  ["Who wrote The Great Gatsby?", "F. Scott Fitzgerald", null, ["F Scott Fitzgerald", "Fitzgerald"]],
+  ["Who wrote Don Quixote?", "Miguel de Cervantes", null, ["Cervantes"]],
+  ["Who wrote Alice's Adventures in Wonderland?", "Lewis Carroll", null, ["Carroll"]],
+  ["Who wrote Frankenstein?", "Mary Shelley", null, ["Shelley"]],
+  ["Who narrates The Catcher in the Rye?", "Holden Caulfield", null, ["Holden"]],
+  ["Which pig becomes the leader in Animal Farm?", "Napoleon"],
+  ["Who wrote Dracula?", "Bram Stoker", null, ["Stoker"]],
+  ["Who wrote One Hundred Years of Solitude?", "Gabriel García Márquez", null, ["Gabriel Garcia Marquez", "Garcia Marquez", "Marquez"]],
+  ["Who wrote Les Misérables?", "Victor Hugo", null, ["Hugo"]],
+]);
+
+add("The '90s", [
+  ["In what year was the Linux kernel first released?", "1991"],
+  ["In what year did Sony release the original PlayStation in Japan?", "1994"],
+  ["In what year did Toy Story premiere?", "1995"],
+  ["In what year did DVD players first go on sale in Japan?", "1996"],
+  ["In what year did the film Titanic premiere?", "1997"],
+  ["In what year did the music-sharing service Napster launch?", "1999"],
+  ["Which fuzzy electronic toy became a holiday craze in 1998?", "Furby"],
+  ["Which collectible plush toys became a major 1990s craze?", "Beanie Babies", null, ["Beanie Baby"]],
+  ["Which TV series followed FBI agents Mulder and Scully?", "The X-Files", null, ["X-Files", "X Files"]],
+  ["Which franchise used the English slogan Gotta catch 'em all?", "Pokémon", null, ["Pokemon"]],
+]);
+
+add("Food & Drink", [
+  ["What is the world's most expensive spice by weight?", "Saffron"],
+  ["What fruit is the main ingredient in guacamole?", "Avocado"],
+  ["What part of an egg is whipped to make a basic meringue?", "Egg white", null, ["egg whites"]],
+  ["What grain is fermented to make Japanese sake?", "Rice"],
+  ["Which country is feta cheese traditionally associated with?", "Greece"],
+  ["What fried Middle Eastern food is commonly made from chickpeas or fava beans?", "Falafel"],
+  ["What small, concentrated coffee originated in Italy?", "Espresso"],
+  ["What vegetable is fermented to make sauerkraut?", "Cabbage"],
+  ["What dairy ingredient forms the base of tzatziki?", "Yogurt", null, ["yoghurt"]],
+  ["Vanilla flavoring comes from the pods of what flowering plant family?", "Orchid", null, ["orchids", "orchid family"]],
+]);
+
+add("Animals", [
+  ["How many hearts does an octopus have?", "Three", null, ["3"]],
+  ["Which land animal has the longest pregnancy, lasting about 22 months?", "Elephant", null, ["African elephant"]],
+  ["What amphibian is famous for retaining its external gills as an adult?", "Axolotl"],
+  ["What is a group of crows called?", "Murder", null, ["a murder"]],
+  ["A narwhal's tusk is actually an enlarged form of what?", "Tooth", null, ["a tooth"]],
+  ["Which animal is the largest living primate?", "Eastern gorilla", null, ["gorilla"]],
+  ["What is a baby kangaroo called?", "Joey"],
+  ["Which bird can fly backward?", "Hummingbird", null, ["hummingbirds"]],
+  ["Which mammal has fingerprints so similar to humans that they can be confused at a crime scene?", "Koala", null, ["koalas"]],
+  ["What is the largest living reptile?", "Saltwater crocodile", null, ["saltwater croc"]],
+]);
+
+add("Science", [
+  ["What is the SI unit of force?", "Newton", null, ["newtons"]],
+  ["What is the atomic number of oxygen?", "Eight", null, ["8"]],
+  ["What is the largest planet in the Solar System?", "Jupiter"],
+  ["Which organelle is often called the powerhouse of the cell?", "Mitochondrion", null, ["mitochondria"]],
+  ["What theory explains the movement of Earth's large crustal plates?", "Plate tectonics", null, ["the theory of plate tectonics"]],
+  ["What temperature is absolute zero on the Kelvin scale?", "Zero kelvin", null, ["0 kelvin", "0 K", "zero K"]],
+  ["Which vitamin can the human body produce when skin is exposed to sunlight?", "Vitamin D"],
+  ["Which blood type is commonly called the universal red-cell donor?", "O negative", null, ["O-negative", "O neg"]],
+  ["Which part of a plant cell carries out photosynthesis?", "Chloroplast", null, ["chloroplasts"]],
+  ["What instrument is used to view objects too small for the unaided eye?", "Microscope"],
+]);
+
+add("Sports", [
+  ["How many bases must a baseball player touch to complete a home run?", "Four", null, ["4"]],
+  ["How many points is an NFL touchdown worth before the extra-point attempt?", "Six", null, ["6"]],
+  ["How many wooden stumps make up a cricket wicket?", "Three", null, ["3"]],
+  ["What flag signals the finish of a motor race?", "Checkered flag", null, ["chequered flag"]],
+  ["Which winter sport combines cross-country skiing and rifle shooting?", "Biathlon"],
+  ["How high is a regulation basketball hoop in feet?", "Ten", null, ["10", "10 feet"]],
+  ["What abbreviation means a knockout in boxing?", "KO", null, ["K.O.", "knockout"]],
+  ["How many events are in a pentathlon?", "Five", null, ["5"]],
+  ["How many points normally win a table-tennis game if the player leads by two?", "Eleven", null, ["11"]],
+  ["What object is struck in ice hockey instead of a ball?", "Puck", null, ["hockey puck"]],
+]);
+
+add("General Knowledge", [
+  ["What is the capital of Australia?", "Canberra"],
+  ["In which city is the Nobel Peace Prize awarded?", "Oslo"],
+  ["What number is pi commonly rounded to two decimal places?", "3.14"],
+  ["What is the name of the bell inside London's Elizabeth Tower?", "Big Ben"],
+  ["Which country has a maple leaf on its national flag?", "Canada"],
+  ["Who is the Greek god of the sea?", "Poseidon"],
+  ["In which country is the Taj Mahal?", "India"],
+  ["What is the capital of Spain?", "Madrid"],
+  ["How many squares are on a standard chessboard?", "Sixty-four", null, ["64"]],
+  ["Which inventor is associated with Europe's movable-type printing press?", "Johannes Gutenberg", null, ["Gutenberg"]],
+]);
+
+add("Philippine History", [
+  ["Who served as the first President of the Philippine Commonwealth?", "Manuel L. Quezon", null, ["Manuel Quezon", "Quezon"]],
+  ["What 1986 uprising is also called the EDSA Revolution?", "People Power Revolution", null, ["People Power", "EDSA People Power Revolution", "EDSA Revolution"]],
+  ["At what church did the Malolos Congress convene in 1898?", "Barasoain Church", null, ["Barasoain"]],
+  ["What 1897 assembly elected Emilio Aguinaldo president of a revolutionary government?", "Tejeros Convention", null, ["Tejeros Assembly"]],
+  ["Who was the first President of the Philippine Senate?", "Manuel L. Quezon", null, ["Manuel Quezon", "Quezon"]],
+  ["What forced march followed the fall of Bataan in 1942?", "Bataan Death March", null, ["the Bataan Death March"]],
+  ["Who edited the revolutionary newspaper La Independencia?", "Antonio Luna", null, ["General Antonio Luna", "Luna"]],
+  ["What 1935 charter established the Philippine Commonwealth?", "1935 Constitution", null, ["the 1935 Constitution", "Constitution of 1935"]],
+  ["Which American general famously promised to return to the Philippines during World War II?", "Douglas MacArthur", null, ["General MacArthur", "MacArthur"]],
+  ["Which Filipina revolutionary is remembered as the Mother of Biak-na-Bato?", "Trinidad Tecson", null, ["Tecson"]],
+]);
+
+add("Philippine Geography", [
+  ["Which province is known as the Island Born of Fire?", "Camiguin"],
+  ["Maria Cristina Falls is located in which city?", "Iligan City", null, ["Iligan"]],
+  ["The Hundred Islands National Park is in which province?", "Pangasinan"],
+  ["The Hinatuan Enchanted River is in which province?", "Surigao del Sur"],
+  ["Which city is the largest in the Philippines by land area?", "Davao City", null, ["Davao"]],
+  ["What river connects Laguna de Bay to Manila Bay?", "Pasig River", null, ["the Pasig River"]],
+  ["What is the highest mountain on Luzon?", "Mount Pulag", null, ["Mt. Pulag", "Mt Pulag"]],
+  ["Which province is home to the surfing destination Baler?", "Aurora"],
+  ["Which sea contains the Tubbataha Reefs Natural Park?", "Sulu Sea", null, ["the Sulu Sea"]],
+  ["Which province contains the underground river at Puerto Princesa?", "Palawan"],
+]);
+
+add("Filipino Culture & Language", [
+  ["What Maranao dance is performed with fans between crossed bamboo poles?", "Singkil"],
+  ["What Philippine gong-chime ensemble is associated with Mindanao and the Sulu Archipelago?", "Kulintang"],
+  ["What fiber used in formal Filipino clothing comes from pineapple leaves?", "Piña", null, ["Pina", "pineapple fiber"]],
+  ["What traditional Filipino house is also called a nipa hut?", "Bahay kubo", null, ["nipa hut"]],
+  ["What wide-brimmed traditional Filipino hat is often made from rattan or reeds?", "Salakot"],
+  ["What decorated public-transport vehicle became a Filipino cultural icon?", "Jeepney", null, ["jeepneys"]],
+  ["What traditional Filipino love-song genre is known for poetic Tagalog lyrics?", "Kundiman"],
+  ["What nine-day series of dawn Masses is held before Christmas?", "Simbang Gabi", null, ["Misa de Gallo"]],
+  ["What May procession commemorates the finding of the Holy Cross?", "Santacruzan"],
+  ["What folk dance uses fans or handkerchiefs to portray courtship?", "Cariñosa", null, ["Carinosa"]],
+]);
+
+add("Filipino Entertainment", [
+  ["Which director made the films Manila in the Claws of Light and Insiang?", "Lino Brocka", null, ["Brocka"]],
+  ["Who is known as the Popstar Royalty of the Philippines?", "Sarah Geronimo", null, ["Sarah G", "Geronimo"]],
+  ["Who played General Antonio Luna in the film Heneral Luna?", "John Arcilla", null, ["Arcilla"]],
+  ["What is the name of the detective heroine in the Filipino comic series Trese?", "Alexandra Trese", null, ["Trese"]],
+  ["Which band recorded the OPM song Harana?", "Parokya ni Edgar", null, ["Parokya"]],
+  ["Which band recorded the song 214?", "Rivermaya"],
+  ["Which singing group launched Smokey Mountain's hit Kailan?", "Smokey Mountain"],
+  ["Who is known as the Queen of Soul in Philippine music?", "Jaya", null, ["Jaya Ramsey"]],
+  ["What is the name of Coco Martin's character in FPJ's Ang Probinsyano?", "Cardo Dalisay", null, ["Ricardo Dalisay", "Cardo"]],
+  ["Who directed Four Sisters and a Wedding?", "Cathy Garcia-Molina", null, ["Cathy Garcia Molina", "Garcia-Molina"]],
+]);
+
+add("Music", [
+  ["Who is the lead singer of The Rolling Stones?", "Mick Jagger", null, ["Jagger"]],
+  ["Which band recorded Smells Like Teen Spirit?", "Nirvana"],
+  ["What is Lady Gaga's birth name?", "Stefani Germanotta", null, ["Stefani Joanne Angelina Germanotta"]],
+  ["Which Caribbean country is Rihanna from?", "Barbados"],
+  ["How many strings does a standard cello have?", "Four", null, ["4"]],
+  ["What musical tempo marking means slow and stately?", "Adagio"],
+  ["Which country did ABBA form in?", "Sweden"],
+  ["Which country is rapper Drake from?", "Canada"],
+  ["What is Eminem's real name?", "Marshall Mathers", null, ["Marshall Bruce Mathers III", "Marshall Bruce Mathers"]],
+  ["Which composer is especially known for piano nocturnes and polonaises?", "Frédéric Chopin", null, ["Frederic Chopin", "Chopin"]],
+]);
+
+add("Filipino Food & Drink", [
+  ["What Filipino stew commonly braises meat in vinegar, soy sauce, garlic, and spices?", "Adobo"],
+  ["What is the Filipino name for local sausage, often served for breakfast?", "Longganisa", null, ["longanisa"]],
+  ["What chocolate rice porridge is often paired with dried salted fish?", "Champorado"],
+  ["What snack wraps banana and sugar in a spring-roll wrapper before frying?", "Turon", null, ["banana turon"]],
+  ["What sweet coiled bread is topped with butter, sugar, and often cheese?", "Ensaymada", null, ["ensaimada"]],
+  ["What chilled dessert combines young coconut, pandan jelly, and cream?", "Buko pandan", null, ["buko pandan salad"]],
+  ["What Filipino ginger tea is traditionally served hot?", "Salabat", null, ["ginger tea"]],
+  ["What strong coffee variety is associated with Batangas?", "Kapeng barako", null, ["barako coffee", "barako"]],
+  ["What savory stew is made with pork blood and vinegar?", "Dinuguan"],
+  ["What noodle dish is topped with an orange shrimp sauce, egg, and crushed chicharon?", "Pancit palabok", null, ["palabok"]],
+]);
+
+add("Japan Culture", [
+  ["What is Japan's indigenous religion called?", "Shinto", null, ["Shintoism"]],
+  ["What is Japan's high-speed railway commonly called?", "Shinkansen", null, ["bullet train"]],
+  ["What is the Japanese art of growing miniature trees in containers?", "Bonsai"],
+  ["What repair art highlights broken pottery seams with lacquer and powdered gold?", "Kintsugi"],
+  ["What traditional Japanese bedding is laid directly on tatami floors?", "Futon", null, ["Japanese futon"]],
+  ["What formal kneeling posture involves sitting on one's heels?", "Seiza"],
+  ["What Japanese word means a traditional festival?", "Matsuri", null, ["festival"]],
+  ["What round doll is used as a symbol of perseverance and goal-setting?", "Daruma", null, ["Daruma doll"]],
+  ["What traditional Japanese inn is called?", "Ryokan", null, ["Japanese inn"]],
+  ["What carp is commonly kept in decorative Japanese ponds?", "Koi", null, ["koi carp"]],
+]);
+
+add("Philippine Literature", [
+  ["Who wrote the short story The Mats?", "Francisco Arcellana", null, ["Arcellana"]],
+  ["Who wrote the short story The Wedding Dance?", "Amador Daguio", null, ["Amador T. Daguio", "Daguio"]],
+  ["Who wrote My Father Goes to Court?", "Carlos Bulosan", null, ["Bulosan"]],
+  ["Who wrote the short story May Day Eve?", "Nick Joaquin", null, ["Joaquin"]],
+  ["Who wrote the novel Gapo?", "Lualhati Bautista", null, ["Bautista"]],
+  ["Who wrote the novel Ilustrado?", "Miguel Syjuco", null, ["Syjuco"]],
+  ["Who wrote State of War?", "Ninotchka Rosca", null, ["Rosca"]],
+  ["Who wrote The Bread of Salt?", "N. V. M. Gonzalez", null, ["NVM Gonzalez", "Nestor Vicente Madali Gonzalez", "Gonzalez"]],
+  ["Who wrote the novel Ermita?", "Nick Joaquin", null, ["Joaquin"]],
+  ["Which Filipino poet also writes under the pen name Rio Alma?", "Virgilio Almario", null, ["Almario"]],
 ]);
 
 export const QUESTIONS = bank;

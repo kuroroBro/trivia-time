@@ -279,12 +279,13 @@ Acceptance criteria:
 - **FR-7**: Every question is validated at load time and must have a unique
   ID, category, prompt, canonical display answer, non-empty accepted-answer
   list, explanation, and supported match mode.
-- **FR-8**: The question bank contains at least 15 launch-ready questions in
+- **FR-8**: The question bank contains at least 30 launch-ready questions in
   each top-level category, at least 10 in each named launch theme, and enough
   non-themed popular Movie questions that an unrestricted Movies game is not
   dominated by one franchise.
-- **FR-9**: Used-question history is local to the Host device and can be reset
-  from the lobby.
+- **FR-9**: Used-question history is local to the Host device. The lobby shows
+  how many questions are remembered and can clear that history without
+  clearing saved Host settings.
 - **FR-10**: No ads, analytics, accounts, player-uploaded questions, remote
   images, or real-money stakes.
 

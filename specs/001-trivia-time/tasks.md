@@ -24,7 +24,7 @@
 - [ ] Define raw and generated question schemas.
 - [ ] Build a generator that validates IDs, categories, themes, aliases,
   matching options, explanations, sources, and image accessibility.
-- [ ] Curate at least 15 questions each for Movies, Books, The '90s, Food &
+- [ ] Curate at least 30 questions each for Movies, Books, The '90s, Food &
   Drink, Animals, Science, Sports, Music, TV Shows, Japan Culture, General
   Knowledge, Philippine History, Philippine Geography, Filipino Culture &
   Language, Filipino Entertainment, Filipino Food & Drink, and Philippine

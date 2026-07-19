@@ -11,6 +11,7 @@ let draftQuestionId = null, answerDraft = "";
 const screens = ["home", "lobby", "question", "reveal", "over"];
 const show = (name) => screens.forEach((x) => $(`screen-${x}`).classList.toggle("hidden", x !== name));
 function toast(text) { const el=$("toast"); el.textContent=text; el.classList.remove("hidden"); setTimeout(()=>el.classList.add("hidden"),2400); }
+function renderHistoryReset() { const count=loadUsedIds().length,button=$("reset-history-btn");button.textContent=count?`Reset question history (${count} used)`:"Question history is empty";button.disabled=count===0; }
 const me = () => state?.players.find((p) => p.id === myId);
 
 function roster(id) {
@@ -26,6 +27,7 @@ function renderLobby() {
   $("copy-btn").onclick=()=>navigator.clipboard?.writeText(url).then(()=>toast("Join link copied"));
   const mine=myId===state.hostId; $("host-settings").classList.toggle("hidden",!mine);
   $("lobby-message").textContent=mine?"Choose categories and start when everyone is ready.":"Waiting for the Host to start…";
+  if(mine)renderHistoryReset();
 }
 
 function renderQuestion() {
@@ -77,7 +79,7 @@ function handle(playerId,event,payload={}){
   if(event==="advance")res=game.advanceRound(room,playerId,Date.now());
   if(event==="again")res=game.resetToLobby(room,playerId);
   if(event==="tick"){const changed=game.checkTimerExpired(room,Date.now());res={ok:true,changed};}
-  if(res?.ok){if(res.usedIds)markUsedIds(res.usedIds);push();} return res||{ok:false,error:"Unknown action"};
+  if(res?.ok){if(res.usedIds){markUsedIds(res.usedIds);renderHistoryReset();}push();} return res||{ok:false,error:"Unknown action"};
 }
 async function act(event,payload){const res=isHost?handle(myId,event,payload):await net.send(event,payload);if(!res?.ok)toast(res?.error||"That didn't work.");return res;}
 
@@ -96,5 +98,6 @@ $("count-select").value=String(saved.questionCount);$("timer-select").value=Stri
 $("create-btn").onclick=create;$("join-btn").onclick=join;$("lock-btn").onclick=()=>act("answer",{answer:$("answer-input").value});
 $("answer-input").oninput=(e)=>{answerDraft=e.target.value};
 $("answer-input").onkeydown=(e)=>{if(e.key==="Enter")$("lock-btn").click()};
-$("start-btn").onclick=()=>{const settings=gameSettings();if(!settings.categories.length&&!settings.themes.length)return toast("Choose at least one category or theme.");saveSettings({...readSettings(),...settings});act("start",{settings})};$("next-btn").onclick=()=>act("advance",{});$("again-btn").onclick=()=>act("again",{});$("reset-history-btn").onclick=()=>{resetUsedIds();toast("Question history reset")};
+$("start-btn").onclick=()=>{const settings=gameSettings();if(!settings.categories.length&&!settings.themes.length)return toast("Choose at least one category or theme.");saveSettings({...readSettings(),...settings});act("start",{settings})};$("next-btn").onclick=()=>act("advance",{});$("again-btn").onclick=()=>act("again",{});$("reset-history-btn").onclick=()=>{const count=resetUsedIds();renderHistoryReset();toast(`${count} used question${count===1?"":"s"} can appear again.`)};
+renderHistoryReset();
 const queryCode=normalizeCode(new URLSearchParams(location.search).get("room"));if(queryCode.length===4)$("code-input").value=queryCode;
