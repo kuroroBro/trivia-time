@@ -4,6 +4,10 @@ A static, phone-friendly multiplayer trivia game. Players join a Host's room,
 type answers privately, and receive automatic Host-side validation against
 accepted aliases and conservative spelling tolerance.
 
+General and Filipino categories are shown separately. Nothing is preselected
+on a first visit; after a game starts, the Host's selections and timing options
+are remembered for the next session.
+
 ## Play locally
 
 Serve this repository with any static HTTP server:

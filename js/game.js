@@ -1,11 +1,15 @@
 import { displayAnswers, judgeAnswer } from "./matcher.js";
 
 export const MAX_PLAYERS = 12;
-export const CATEGORIES = [
+export const GENERAL_CATEGORIES = [
   "Movies", "Books", "The '90s", "Food & Drink", "Animals", "Science",
-  "Sports", "Music", "TV Shows", "General Knowledge", "Philippine History", "Philippine Geography",
-  "Filipino Culture & Language", "Filipino Entertainment", "Filipino Food & Drink",
+  "Sports", "Music", "TV Shows", "General Knowledge",
 ];
+export const FILIPINO_CATEGORIES = [
+  "Philippine History", "Philippine Geography", "Filipino Culture & Language",
+  "Filipino Entertainment", "Filipino Food & Drink",
+];
+export const CATEGORIES = [...GENERAL_CATEGORIES, ...FILIPINO_CATEGORIES];
 
 const fail = (error) => ({ ok: false, error });
 const cleanName = (name) => String(name || "").trim().slice(0, 20);
@@ -13,7 +17,7 @@ const cleanName = (name) => String(name || "").trim().slice(0, 20);
 export function createRoom(code, hostId) {
   return {
     code, hostId, phase: "lobby", players: [], deck: [], roundIndex: -1,
-    settings: { categories: [...CATEGORIES], themes: [], questionCount: 10, timerSeconds: 30, revealAdvanceSeconds: 0 },
+    settings: { categories: [], themes: [], questionCount: 10, timerSeconds: 30, revealAdvanceSeconds: 0 },
     questionStartedAt: null, questionDeadlineAt: null, revealStartedAt: null,
     lastResult: null, winnerIds: [], scoredRound: null,
   };

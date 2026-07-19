@@ -67,6 +67,13 @@ clear to both Filipino and English readers. Where an answer has Filipino,
 English, historical, or alternate-spelling forms, all factually equivalent
 forms are stored as explicit accepted aliases.
 
+The selection screen visually separates general categories from Filipino
+categories. `Food & Drink` contains international food trivia, while `Filipino
+Food & Drink` is independently selectable and contains the Filipino food pack.
+On a first visit every category and theme is unchecked. After the Host starts a
+game, the selected categories/themes, round count, timers, Host role, and name
+are restored on later visits.
+
 Questions about a decade must be unambiguous about the requested year. If the
 answer is a year, the prompt states whether it asks when something debuted,
 was released, was founded, or became a trend. The stored explanation records

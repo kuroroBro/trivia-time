@@ -77,6 +77,8 @@
 - [ ] Build Home and Lobby screens with a locally generated QR, copyable join
   link, room-code fallback, filters, fresh-question count, settings, and
   history reset.
+- [ ] Default to no category/theme selection, restore all previously saved Host
+  settings, and render general and Filipino categories in separate groups.
 - [ ] Build the free-text Question screen with keyboard/Enter support,
   100-character limit, locked state, timer, and roster status.
 - [ ] Build Reveal with meaningful accepted answers, explanation, responses,

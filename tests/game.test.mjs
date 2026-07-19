@@ -20,6 +20,14 @@ test("bank has at least 20 questions in all 15 categories", () => {
   }
 });
 
+test("general and Filipino categories are separate exhaustive groups", () => {
+  assert.equal(game.GENERAL_CATEGORIES.includes("Food & Drink"), true);
+  assert.equal(game.GENERAL_CATEGORIES.includes("Filipino Food & Drink"), false);
+  assert.equal(game.FILIPINO_CATEGORIES.includes("Filipino Food & Drink"), true);
+  assert.equal(game.FILIPINO_CATEGORIES.includes("Food & Drink"), false);
+  assert.deepEqual([...game.GENERAL_CATEGORIES, ...game.FILIPINO_CATEGORIES], game.CATEGORIES);
+});
+
 test("typed answers are private before reveal", () => {
   const room = started();
   game.submitAnswer(room, "host", room.deck[0].answer, 1100);
