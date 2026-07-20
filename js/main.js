@@ -4,6 +4,7 @@ import { QUESTIONS, THEMES } from "./questions.js";
 import { hostRoom, joinRoom, normalizeCode } from "./room.js";
 import { unlockAudio, playGameStart } from "./sound.js";
 import { createResumeToken, loadSession, loadSettings, loadUsedIds, markUsedIds, resetUsedIds, saveSession, saveSettings } from "./storage.js";
+import { recordShowResult } from "./leaderboard.js";
 
 const HOST_ID = "host";
 const $ = (id) => document.getElementById(id);
@@ -74,6 +75,11 @@ function tick(){
 
 function applyState(next){state=next;stateReceivedAt=Date.now();render();}
 function push(){const now=Date.now();state=game.toPublicState(room,myId,now);stateReceivedAt=now;net?.broadcastEach?.("state",(id)=>game.toPublicState(room,id,now));render();}
+// Records the finished show for the cross-game Leader Board, from the same
+// final state renderOver() shows the players -- see
+// leader-board/specs/001-leader-board/. Host-only (runs inside handle(),
+// which only runs on the Host device).
+function recordShow(){recordShowResult({game:"trivia-time",gameName:"Trivia Time",players:room.players.map((p)=>({name:p.name,score:p.score||0})),winners:room.players.filter((p)=>(room.winnerIds||[]).includes(p.id)).map((p)=>p.name),meta:{questions:room.deck?.length}});}
 function handle(playerId,event,payload={}){
   let res;
   if(event==="join"){const re=payload.resumeToken&&game.rejoinPlayer(room,playerId,payload.resumeToken);if(re?.ok)res={ok:true,rejoined:true};else res=game.addPlayer(room,playerId,payload.name,payload.resumeToken);if(res.ok)queueMicrotask(push);return{...res,state:res.ok?game.toPublicState(room,playerId):null};}
@@ -81,7 +87,7 @@ function handle(playerId,event,payload={}){
   if(event==="start")res=game.startGame(room,playerId,{pool:QUESTIONS,settings:payload.settings,usedIds:loadUsedIds(),now:Date.now()});
   if(event==="answer")res=game.submitAnswer(room,playerId,payload.answer,Date.now());
   if(event==="override")res=game.overrideJudgment(room,playerId,payload.playerId,payload.correct,Date.now());
-  if(event==="advance")res=game.advanceRound(room,playerId,Date.now());
+  if(event==="advance"){res=game.advanceRound(room,playerId,Date.now());if(res?.ok&&room.phase==="over")recordShow();}
   if(event==="again")res=game.resetToLobby(room,playerId);
   if(event==="tick"){const changed=game.checkTimerExpired(room,Date.now());res={ok:true,changed};}
   if(res?.ok){if(res.usedIds){markUsedIds(res.usedIds);renderHistoryReset();}push();} return res||{ok:false,error:"Unknown action"};
