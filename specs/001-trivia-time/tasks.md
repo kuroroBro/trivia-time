@@ -48,6 +48,36 @@
   authoritative sources.
 - [ ] Add generator and coverage-count tests.
 
+### Question bank expansion to 100 per category (2026-07-22, owner request)
+
+- [x] Raised all 17 original categories from 30 (or 50 for Books, which
+      already had partial coverage) to 100 questions each. Movies (195) and
+      TV Shows (150), already above 100 from their theme sets, were left
+      unchanged.
+- [x] Added 5 new categories, 100 questions each, registered in
+      `js/game.js`'s `GENERAL_CATEGORIES`: History, Geography, Technology,
+      Video Games, Mythology.
+- [x] Bank total: 815 → 2,345 questions across 22 categories (1,530 new
+      rows). Content was drafted by parallel background agents (one per
+      category or small category group), each given the existing prompts
+      for its category as a dedup reference and instructed that every fact
+      must be true and verifiable — not invented.
+- [x] Cross-agent duplicate prompts (agents can't see each other's output,
+      so overlapping general-knowledge/geography/technology facts collided
+      in a few places, e.g. "Who founded Facebook?" appearing in both
+      General Knowledge and Technology) were caught and resolved by a
+      scripted global dedup pass over the whole bank, keeping the first
+      occurrence and topping up the categories that fell short of 100 as a
+      result (Geography, History, Technology, Sports) with additional
+      verified, non-duplicate questions.
+- [x] `tests/game.test.mjs`'s bank-shape test updated: total count 815 → 2345,
+      per-category minimum 30 → 100, category count 17 → 22 (via
+      `game.CATEGORIES`, which now includes the 5 new ones automatically).
+- [x] Live-verified: each of the 5 new categories starts a real two-player
+      game via `game.startGame()` and deals questions from the correct
+      category; full test suite (18 tests) passes; `node --check` passes on
+      both touched files.
+
 ## Phase 4 — Rules engine
 
 - [ ] Implement room/player lifecycle, fixed Host identity, spectator Host,

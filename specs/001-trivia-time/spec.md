@@ -44,6 +44,11 @@ The initial question bank supports these top-level categories:
 | Filipino Entertainment | Pinoy movies and television, OPM, artists, celebrities, iconic characters, and popular media |
 | Filipino Food & Drink | Filipino dishes, desserts, ingredients, street food, regional specialties, and refreshments |
 | Philippine Literature | Filipino novels, poetry, short stories, epics, writers, and literary figures |
+| History | World history: empires, wars, revolutions, and major figures across eras and regions |
+| Geography | World capitals, rivers, mountains, deserts, oceans, and geographic records |
+| Technology | Computing history, the internet, notable companies/founders, and tech milestones |
+| Video Games | Consoles, franchises, characters, and gaming industry history |
+| Mythology | Greek, Roman, Norse, Egyptian, and other world mythologies |
 
 `category` is always one of the top-level values. `theme` is optional and
 narrows a question within a category, such as `Star Wars` under Movies or
@@ -279,10 +284,11 @@ Acceptance criteria:
 - **FR-7**: Every question is validated at load time and must have a unique
   ID, category, prompt, canonical display answer, non-empty accepted-answer
   list, explanation, and supported match mode.
-- **FR-8**: The question bank contains at least 30 launch-ready questions in
-  each top-level category, at least 10 in each named launch theme, and enough
-  non-themed popular Movie questions that an unrestricted Movies game is not
-  dominated by one franchise.
+- **FR-8**: The question bank contains at least 100 launch-ready questions in
+  each top-level category (2026-07-22: raised from 30, see tasks.md), at least
+  10 in each named launch theme, and enough non-themed popular Movie
+  questions that an unrestricted Movies game is not dominated by one
+  franchise.
 - **FR-9**: Used-question history is local to the Host device. The lobby shows
   how many questions are remembered and can clear that history without
   clearing saved Host settings.

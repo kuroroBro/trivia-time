@@ -4,6 +4,7 @@ export const MAX_PLAYERS = 12;
 export const GENERAL_CATEGORIES = [
   "Movies", "Books", "The '90s", "Food & Drink", "Animals", "Science",
   "Sports", "Music", "TV Shows", "Japan Culture", "General Knowledge",
+  "History", "Geography", "Technology", "Video Games", "Mythology",
 ];
 export const FILIPINO_CATEGORIES = [
   "Philippine History", "Philippine Geography", "Filipino Culture & Language",

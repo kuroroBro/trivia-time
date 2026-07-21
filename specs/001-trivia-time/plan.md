@@ -209,9 +209,10 @@ automatic reveal advancement, narrow mobile layout, and optional image alt text.
 ## Content Plan
 
 Launched with at least 550 curated questions, later expanded (see Changelog)
-to at least 815:
+to 2,345 across 22 categories, each with at least 100 questions:
 
-- 30 or more in each of the seventeen top-level categories;
+- 100 or more in each of the twenty-two top-level categories (originally 30
+  per category across seventeen categories; see Changelog v3);
 - at least 30 questions in each popular Movie theme: Star Wars, Marvel
   Cinematic Universe, Disney & Pixar, The Lord of the Rings, Jurassic Park,
   and Studio Ghibli;
@@ -263,3 +264,15 @@ variant. Store meaningful aliases for reveal and mechanical variants as
   `tests/game.test.mjs`'s theme-count assertion was raised from `>= 10` to
   `>= 30` and now also covers Harry Potter, which the original assertion
   omitted.
+- **v3** (2026-07-22): Raised every category to at least 100 questions (30 →
+  100, or 50 → 100 for Books) and added five new categories at 100 each —
+  History, Geography, Technology, Video Games, Mythology — per owner
+  request. Bank grew from 815 to 2,345 questions across 22 categories.
+  Content was drafted by parallel background agents, each checked against
+  a dump of existing prompts for its category to avoid duplicates; a
+  scripted global dedup pass then caught the handful of cross-agent
+  collisions agents couldn't see coming (e.g. capital-city and
+  tech-company-founder questions independently drafted into more than one
+  category) and topped up the affected categories back to 100 with
+  additional verified questions. See tasks.md's "Question bank expansion"
+  section for the full breakdown.
