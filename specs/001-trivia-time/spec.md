@@ -122,7 +122,8 @@ Acceptance criteria:
 - The Host selects one or more top-level categories.
 - For categories with themes, the Host can include all questions or restrict
   the pool to one or more themes (for example, Star Wars or Harry Potter).
-- The Host can choose 6–20 rounds, default 10, and a question timer of off,
+- The Host can choose 6–20, 30, 40, or 50 rounds, default 10, and a question
+  timer of off,
   20, 30, 45, or 60 seconds, default 30.
 - The Host chooses manual reveal advancement or automatic advancement after
   5, 8, or 12 seconds, default manual.

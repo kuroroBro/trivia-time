@@ -102,6 +102,7 @@ function gameSettings(){return{categories:[...document.querySelectorAll("[data-c
 const saved=loadSettings();$("name-input").value=saved.name||"";$("spectator-input").checked=saved.spectatorHost;
 const savedCategories=Array.isArray(saved.categories)?saved.categories:[],savedThemes=Array.isArray(saved.themes)?saved.themes:[];
 for(let i=6;i<=20;i++)$("count-select").add(new Option(`${i} rounds`,i));
+for(const i of[30,40,50])$("count-select").add(new Option(`${i} rounds`,i));
 function addCategoryChecks(categories,containerId){for(const c of categories){const count=QUESTIONS.filter((q)=>q.category===c).length;const label=document.createElement("label");const checked=savedCategories.includes(c)?" checked":"";label.innerHTML=`<input type="checkbox" data-category value="${c}"${checked}> ${c} (${count})`;$(containerId).appendChild(label)}}
 addCategoryChecks(game.GENERAL_CATEGORIES,"general-category-list");addCategoryChecks(game.FILIPINO_CATEGORIES,"filipino-category-list");
 for(const t of THEMES){const count=QUESTIONS.filter((q)=>q.theme===t).length;const label=document.createElement("label");const checked=savedThemes.includes(t)?" checked":"";label.innerHTML=`<input type="checkbox" data-theme value="${t}"${checked}> ${t} (${count})`;$("theme-list").appendChild(label)}

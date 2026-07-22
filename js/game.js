@@ -77,7 +77,7 @@ export function buildDeck(pool, settings, usedIds = [], rng = Math.random) {
   const themedCategories = new Set(pool.filter((q) => selectedThemes.includes(q.theme)).map((q) => q.category));
   const eligible = pool.filter((q) => categories.includes(q.category) && !usedIds.includes(q.id) &&
     (!themedCategories.has(q.category) || selectedThemes.includes(q.theme)));
-  const count = Math.max(6, Math.min(20, Number(settings.questionCount) || 10));
+  const count = Math.max(6, Math.min(50, Number(settings.questionCount) || 10));
   if (eligible.length < count) return fail(`Only ${eligible.length} fresh questions match these filters. Choose more categories or reset history.`);
   const groups = new Map(categories.map((c) => [c, shuffle(eligible.filter((q) => q.category === c), rng)]));
   const deck = [];

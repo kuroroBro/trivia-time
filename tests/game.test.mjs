@@ -32,6 +32,16 @@ test("general and Filipino categories are separate exhaustive groups", () => {
   assert.deepEqual([...game.GENERAL_CATEGORIES, ...game.FILIPINO_CATEGORIES], game.CATEGORIES);
 });
 
+test("games support up to 50 rounds", () => {
+  const room = started(50);
+  assert.equal(room.deck.length, 50);
+  const capped = game.createRoom("CAP", "host");
+  game.addPlayer(capped, "host", "Host", "h");
+  const res = game.startGame(capped, "host", { pool: QUESTIONS, settings: { categories: ["Science"], themes: [], questionCount: 99, timerSeconds: 30, revealAdvanceSeconds: 0 }, rng: () => 0.2, now: 1000 });
+  assert.equal(res.ok, true);
+  assert.equal(capped.deck.length, 50);
+});
+
 test("typed answers are private before reveal", () => {
   const room = started();
   game.submitAnswer(room, "host", room.deck[0].answer, 1100);
