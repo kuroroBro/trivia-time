@@ -183,8 +183,10 @@ Acceptance criteria:
   - no fuzzy matching for answers shorter than 5 characters;
   - maximum edit distance 1 for 5–8 characters and 2 for 9 or more;
   - digits must match exactly, so `1996` never fuzzily matches `1997`;
-  - token count must match unless the question explicitly permits an omitted
-    token;
+  - comparison runs on space/hyphen-compacted forms, so a typo combined
+    with a spacing difference is still tolerated (`spider mann` matches
+    `Spider-Man`), and surname forms are fuzzy targets on who-questions
+    (`Miyazakki` matches `Hayao Miyazaki`);
   - a response must not be accepted if it is equally close to two conflicting
     accepted answers in that question's judging context.
 - Numeric, year, ordered-list, and multi-part questions use explicit match

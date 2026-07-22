@@ -108,15 +108,19 @@ function judgeText(response, question) {
       surnameForms(a.normalized).some((s) => s === normalized || compactForm(s) === compact));
     if (surname) return result(true, "surname match", surname.text);
   }
-  if (!opts.fuzzy || normalized.length < 5 || /\d/.test(normalized)) return result(false, "incorrect");
-  const limit = normalized.length <= 8 ? 1 : 2;
-  const tokenCount = normalized.split(" ").length;
-  const ranked = candidates
-    .filter((a) => !/\d/.test(a.normalized) && a.normalized.split(" ").length === tokenCount)
-    .map((a) => ({ a, distance: editDistance(normalized, a.normalized, limit) }))
-    .filter((x) => x.distance <= limit)
+  if (!opts.fuzzy || compact.length < 5 || /\d/.test(normalized)) return result(false, "incorrect");
+  const limit = compact.length <= 8 ? 1 : 2;
+  const targets = [];
+  for (const a of candidates) {
+    if (/\d/.test(a.normalized)) continue;
+    targets.push({ a, key: compactForm(a.normalized) });
+    if (opts.surname) for (const s of surnameForms(a.normalized)) targets.push({ a, key: compactForm(s) });
+  }
+  const ranked = targets
+    .map((t) => ({ ...t, distance: editDistance(compact, t.key, limit) }))
+    .filter((t) => t.distance <= limit)
     .sort((x, y) => x.distance - y.distance);
-  if (!ranked.length || (ranked[1] && ranked[1].distance === ranked[0].distance && ranked[1].a.normalized !== ranked[0].a.normalized)) {
+  if (!ranked.length || (ranked[1] && ranked[1].distance === ranked[0].distance && ranked[1].key !== ranked[0].key)) {
     return result(false, "incorrect");
   }
   return result(true, "fuzzy typo", ranked[0].a.text);

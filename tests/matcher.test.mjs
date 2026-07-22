@@ -67,6 +67,16 @@ test("lumpiang shanghai is accepted for the lumpia question", () => {
   const lumpia = QUESTIONS.find((item) => item.answer === "Lumpia");
   assert.equal(judgeAnswer("Lumpiang Shanghai", lumpia).correct, true);
   assert.equal(judgeAnswer("lumpiang-shanghai", lumpia).correct, true);
+  assert.equal(judgeAnswer("lumpiang shangai", lumpia).correct, true);
+});
+
+test("typos are tolerated across spacing and surname variants", () => {
+  assert.equal(judgeAnswer("spider mann", q("Spider-Man")).reason, "fuzzy typo");
+  assert.equal(judgeAnswer("spidermn", q("Spider-Man")).correct, true);
+  const who = (answer) => q(answer, [answer], { mode: "text", fuzzy: true, optionalArticles: true, surname: true });
+  assert.equal(judgeAnswer("Miyazakki", who("Hayao Miyazaki")).reason, "fuzzy typo");
+  assert.equal(judgeAnswer("Fitzgerald", who("F. Scott Fitzgerald")).correct, true);
+  assert.equal(judgeAnswer("Mizuki", who("Hayao Miyazaki")).correct, false);
 });
 
 test("edit distance is bounded", () => {
