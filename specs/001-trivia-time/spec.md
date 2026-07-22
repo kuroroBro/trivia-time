@@ -177,6 +177,11 @@ Acceptance criteria:
 - Questions that ask *who* accept the surname alone (including surname
   particles), so `Miyazaki` matches `Hayao Miyazaki` and `da Vinci` matches
   `Leonardo da Vinci`. First names alone are not accepted.
+- Landmark/place descriptor words (`City`, `River`, `Desert`, `Empire`,
+  `Mount`, `Lake`, and similar) are optional in both directions: `Vatican`
+  matches `Vatican City`, `Gobi` matches `Gobi Desert`, `Roman` matches
+  `Roman Empire`, and `Everest` matches `Mount Everest`. The descriptor
+  alone (`Empire`) is never accepted.
 - Conservative fuzzy matching may accept a likely typo only when the question
   enables it. It compares the response with every accepted answer and uses
   the best candidate:

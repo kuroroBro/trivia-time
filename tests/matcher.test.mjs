@@ -79,6 +79,19 @@ test("typos are tolerated across spacing and surname variants", () => {
   assert.equal(judgeAnswer("Mizuki", who("Hayao Miyazaki")).correct, false);
 });
 
+test("place descriptor words are optional in both directions", () => {
+  assert.equal(judgeAnswer("Vatican", q("Vatican City")).reason, "place name match");
+  assert.equal(judgeAnswer("Vatican City", q("Vatican")).correct, true);
+  assert.equal(judgeAnswer("Gobi", q("Gobi Desert")).correct, true);
+  assert.equal(judgeAnswer("Roman", q("Roman Empire")).correct, true);
+  assert.equal(judgeAnswer("Roman Empire", q("Roman Empire")).correct, true);
+  assert.equal(judgeAnswer("Everest", q("Mount Everest")).correct, true);
+  assert.equal(judgeAnswer("Baikal", q("Lake Baikal")).correct, true);
+  assert.equal(judgeAnswer("Empire", q("Roman Empire")).correct, false);
+  assert.equal(judgeAnswer("Gobi Dessert", q("Gobi Desert")).reason, "fuzzy typo");
+  assert.equal(judgeAnswer("Vaticann", q("Vatican City")).correct, true);
+});
+
 test("edit distance is bounded", () => {
   assert.equal(editDistance("kitten", "sitten", 1), 1);
   assert.equal(editDistance("kitten", "sunday", 1), 2);

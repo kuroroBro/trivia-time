@@ -65,6 +65,23 @@ function compactForm(normalized) {
   return normalized.replace(/[\s-]/g, "");
 }
 
+// Generic landmark/place descriptor words that players may omit or add:
+// "Vatican" ≡ "Vatican City", "Gobi" ≡ "Gobi Desert", "Roman" ≡ "Roman Empire".
+const PLACE_DESCRIPTORS = new Set([
+  "city", "river", "desert", "empire", "dynasty", "ocean", "sea", "lake", "bay",
+  "gulf", "island", "islands", "mount", "mountain", "mountains", "volcano",
+  "falls", "strait", "canal", "peninsula",
+]);
+
+function descriptorForms(normalized) {
+  const tokens = normalized.split(" ");
+  if (tokens.length < 2) return [];
+  const forms = [];
+  if (PLACE_DESCRIPTORS.has(tokens[tokens.length - 1])) forms.push(tokens.slice(0, -1).join(" "));
+  if (PLACE_DESCRIPTORS.has(tokens[0])) forms.push(tokens.slice(1).join(" "));
+  return forms;
+}
+
 const NAME_SUFFIXES = new Set(["jr", "sr", "ii", "iii", "iv"]);
 
 // Every trailing token run of a multi-word name, so "da vinci" and "vinci"
@@ -98,6 +115,13 @@ function judgeText(response, question) {
     const spacing = candidates.find((a) => compactForm(a.normalized) === compact);
     if (spacing) return result(true, "normalized match", spacing.text);
   }
+  // A descriptor-stripped form only matches the other side's full form, so
+  // "Vatican" ≡ "Vatican City" but "Apo Island" never reaches "Mount Apo".
+  const responseStripped = descriptorForms(normalized).map(compactForm);
+  const place = candidates.find((a) =>
+    descriptorForms(a.normalized).map(compactForm).includes(compact) ||
+    responseStripped.includes(compactForm(a.normalized)));
+  if (place) return result(true, "place name match", place.text);
   const responseNumber = numericValue(normalized);
   if (responseNumber != null) {
     const numeric = candidates.find((a) => numericValue(a.normalized) === responseNumber);
@@ -110,15 +134,18 @@ function judgeText(response, question) {
   }
   if (!opts.fuzzy || compact.length < 5 || /\d/.test(normalized)) return result(false, "incorrect");
   const limit = compact.length <= 8 ? 1 : 2;
+  // Derived forms (surnames, descriptor-stripped names) are shorter than the
+  // full alias, so they only tolerate a single-character typo.
   const targets = [];
   for (const a of candidates) {
     if (/\d/.test(a.normalized)) continue;
-    targets.push({ a, key: compactForm(a.normalized) });
-    if (opts.surname) for (const s of surnameForms(a.normalized)) targets.push({ a, key: compactForm(s) });
+    targets.push({ a, key: compactForm(a.normalized), limit });
+    for (const s of descriptorForms(a.normalized)) targets.push({ a, key: compactForm(s), limit: 1 });
+    if (opts.surname) for (const s of surnameForms(a.normalized)) targets.push({ a, key: compactForm(s), limit: 1 });
   }
   const ranked = targets
-    .map((t) => ({ ...t, distance: editDistance(compact, t.key, limit) }))
-    .filter((t) => t.distance <= limit)
+    .map((t) => ({ ...t, distance: editDistance(compact, t.key, t.limit) }))
+    .filter((t) => t.distance <= t.limit)
     .sort((x, y) => x.distance - y.distance);
   if (!ranked.length || (ranked[1] && ranked[1].distance === ranked[0].distance && ranked[1].key !== ranked[0].key)) {
     return result(false, "incorrect");
