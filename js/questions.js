@@ -8,7 +8,12 @@ function add(category, rows) {
     id: `${slug(category)}-${String(existing + index + 1).padStart(3, "0")}`,
     category, theme, prompt, answer,
     acceptedAnswers: [answer, ...aliases].map((text) => ({ text, display: text !== answer })),
-    match: { mode: /^\d{4}$/.test(answer) ? "year" : "text", fuzzy: !/^\d{4}$/.test(answer), optionalArticles: true },
+    match: {
+      mode: /^\d{4}$/.test(answer) ? "year" : "text",
+      fuzzy: !/^\d{4}$/.test(answer),
+      optionalArticles: true,
+      surname: /\bwhom?\b/i.test(prompt),
+    },
     explanation: `${answer} is the accepted answer.`,
   }));
 }
@@ -390,7 +395,7 @@ add("Filipino Food & Drink", [
   ["What Filipino soup is known for its distinctly sour broth?", "Sinigang"],
   ["Which fruit is a common traditional souring ingredient for sinigang?", "Tamarind", null, ["sampalok"]],
   ["What Filipino celebration dish is a whole roasted pig?", "Lechon", null, ["lechon baboy"]],
-  ["What Filipino snack is a fried or fresh spring roll?", "Lumpia", null, ["spring roll", "spring rolls"]],
+  ["What Filipino snack is a fried or fresh spring roll?", "Lumpia", null, ["spring roll", "spring rolls", "Lumpiang Shanghai"]],
   ["What general Filipino term refers to noodle dishes?", "Pancit", null, ["pansit"]],
   ["Which Filipino stew is traditionally served with a thick peanut sauce?", "Kare-kare", null, ["kare kare"]],
   ["What fermented fish or shrimp paste commonly accompanies kare-kare?", "Bagoong", null, ["shrimp paste", "fish paste"]],

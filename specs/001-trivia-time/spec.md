@@ -170,6 +170,13 @@ Acceptance criteria:
 - A question may explicitly allow optional articles (`a`, `an`, `the`), units,
   honorifics, or parenthetical qualifiers. These are not removed globally.
 - Exact normalized matches against any accepted answer are correct.
+- Responses that differ from an accepted answer only in spacing or hyphens
+  are correct (`Spider Man`, `Spider-Man`, and `Spiderman` are equivalent).
+- Digits and spelled-out number words are interchangeable: `7` matches
+  `Seven` and vice versa, in text mode and in numeric mode.
+- Questions that ask *who* accept the surname alone (including surname
+  particles), so `Miyazaki` matches `Hayao Miyazaki` and `da Vinci` matches
+  `Leonardo da Vinci`. First names alone are not accepted.
 - Conservative fuzzy matching may accept a likely typo only when the question
   enables it. It compares the response with every accepted answer and uses
   the best candidate:

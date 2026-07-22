@@ -33,6 +33,48 @@ export function editDistance(a, b, max = Infinity) {
   return previous[b.length];
 }
 
+const NUMBER_WORDS = new Map(Object.entries({
+  zero: 0, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9,
+  ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16,
+  seventeen: 17, eighteen: 18, nineteen: 19,
+  twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60, seventy: 70, eighty: 80, ninety: 90,
+}));
+const NUMBER_SCALES = new Map(Object.entries({ thousand: 1000, million: 1000000 }));
+
+export function numberWordValue(text) {
+  const tokens = String(text).toLocaleLowerCase("en").split(/[\s-]+/).filter((t) => t && t !== "and");
+  if (!tokens.length) return null;
+  let total = 0;
+  let current = 0;
+  for (const token of tokens) {
+    if (NUMBER_WORDS.has(token)) current += NUMBER_WORDS.get(token);
+    else if (token === "hundred") current = (current || 1) * 100;
+    else if (NUMBER_SCALES.has(token)) { total += (current || 1) * NUMBER_SCALES.get(token); current = 0; }
+    else return null;
+  }
+  return total + current;
+}
+
+function numericValue(normalized) {
+  const cleaned = normalized.replace(/,/g, "");
+  if (/^-?\d+(?:\.\d+)?$/.test(cleaned)) return Number(cleaned);
+  return numberWordValue(normalized);
+}
+
+function compactForm(normalized) {
+  return normalized.replace(/[\s-]/g, "");
+}
+
+const NAME_SUFFIXES = new Set(["jr", "sr", "ii", "iii", "iv"]);
+
+// Every trailing token run of a multi-word name, so "da vinci" and "vinci"
+// both count as the surname of "leonardo da vinci".
+function surnameForms(normalized) {
+  const tokens = normalized.split(" ").filter((t) => !NAME_SUFFIXES.has(t.replace(/\./g, "")));
+  if (tokens.length < 2) return [];
+  return tokens.slice(1).map((_, i) => tokens.slice(i + 1).join(" "));
+}
+
 function aliases(question) {
   const raw = question.acceptedAnswers?.length ? question.acceptedAnswers : [question.answer];
   return raw.map((a) => typeof a === "string" ? { text: a, display: true } : a);
@@ -51,6 +93,21 @@ function judgeText(response, question) {
     const rawSame = String(response).trim().toLocaleLowerCase("en") === String(exact.text).trim().toLocaleLowerCase("en");
     return result(true, rawSame ? "exact alias" : "normalized match", exact.text);
   }
+  const compact = compactForm(normalized);
+  if (compact) {
+    const spacing = candidates.find((a) => compactForm(a.normalized) === compact);
+    if (spacing) return result(true, "normalized match", spacing.text);
+  }
+  const responseNumber = numericValue(normalized);
+  if (responseNumber != null) {
+    const numeric = candidates.find((a) => numericValue(a.normalized) === responseNumber);
+    if (numeric) return result(true, "number match", numeric.text);
+  }
+  if (opts.surname) {
+    const surname = candidates.find((a) =>
+      surnameForms(a.normalized).some((s) => s === normalized || compactForm(s) === compact));
+    if (surname) return result(true, "surname match", surname.text);
+  }
   if (!opts.fuzzy || normalized.length < 5 || /\d/.test(normalized)) return result(false, "incorrect");
   const limit = normalized.length <= 8 ? 1 : 2;
   const tokenCount = normalized.split(" ").length;
@@ -65,17 +122,23 @@ function judgeText(response, question) {
   return result(true, "fuzzy typo", ranked[0].a.text);
 }
 
-function judgeNumber(response, question) {
-  const cleaned = normalizeText(response).replace(/,/g, "");
+function parseNumeric(text) {
+  const cleaned = normalizeText(text).replace(/,/g, "");
   const parsed = cleaned.match(/^(-?\d+(?:\.\d+)?)\s*([^\d]*)$/);
+  if (parsed) return { value: Number(parsed[1]), unit: parsed[2].trim() };
+  const worded = numberWordValue(cleaned);
+  return worded == null ? null : { value: worded, unit: "" };
+}
+
+function judgeNumber(response, question) {
+  const parsed = parseNumeric(response);
   if (!parsed) return result(false, "incorrect");
-  const value = Number(parsed[1]);
   const tolerance = Number(question.match?.tolerance || 0);
   for (const alias of aliases(question)) {
-    const expected = normalizeText(alias.text).replace(/,/g, "").match(/^(-?\d+(?:\.\d+)?)\s*([^\d]*)$/);
+    const expected = parseNumeric(alias.text);
     if (!expected) continue;
-    const sameUnit = !expected[2] || !parsed[2] || expected[2].trim() === parsed[2].trim();
-    if (sameUnit && Math.abs(value - Number(expected[1])) <= tolerance) return result(true, "numeric match", alias.text);
+    const sameUnit = !expected.unit || !parsed.unit || expected.unit === parsed.unit;
+    if (sameUnit && Math.abs(parsed.value - expected.value) <= tolerance) return result(true, "numeric match", alias.text);
   }
   return result(false, "incorrect");
 }
